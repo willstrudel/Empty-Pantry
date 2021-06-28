@@ -5,116 +5,86 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="./assets/CSS/reset.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <link rel="stylesheet" href="./assets/CSS/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 <body>
-    <header>
-        <nav class="navbar is-warning">
-            <div class="">
-                <p class="font-large">Empty Pantry</p>
-            </div>
-            <div class="navbar-end">
-                <div class="navbar-item has-dropdown is-hoverable">
-                  <a class="navbar-link">
-                    Dropdown
-                  </a>
-          
-                  <div class="navbar-dropdown is-right">
-                    <a class="navbar-item">
-                      Overview
-                    </a>
-                    <a class="navbar-item">
-                      Elements
-                    </a>
-                    <a class="navbar-item">
-                      Components
-                    </a>
-                    <hr class="navbar-divider">
-                    <div class="navbar-item">
-                      Version 0.9.3
+    <nav class="navbar is-warning" role="navigation" aria-label="main navigation">
+        <div class="navbar-menu">
+          <a class="navbar-item" href="https://bulma.io">
+            <img src="" alt="logo" width="" height="">
+          </a>
+          <div class="navbar-end">
+              <p class="title">Empty Pantry</p>
+          </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="columns">
+            <div class="column is-three-Quartder">
+                <section class="section">
+                    <h1 class="title">Choose your diet!</h1>
+                    <div class="buttons are-medium">
+                        <button class="button btn-LC">Low-Carb</button>
+                        <button class="button btn-LF">Low-Fat</button>
+                        <button class="button btn-HP">High-Protein</button>
+                        <button class="button btn-BL">Balanced</button>
                     </div>
+                </section>
+                <section class="section">
+                    <h1 class="title">What meals are we having today?</h1>
+                    <div class="buttons are-medium">
+                        <button class="button btn-BF">Breakfast</button>
+                        <button class="button btn-LC">Lunch</button>
+                        <button class="button btn-DN">Dinner</button>
+                        <button class="button btn-SK">Snack</button>
+                    </div>
+                </section>
+                <section class="section">
+                    <h1 class="title">What ingredients are we working with?</h1>
+                    <div class="field has-addons">
+                        <div class="control">
+                          <input class="input" type="text" placeholder="Choose your ingredient">
+                        </div>
+                        <div class="control">
+                          <a class="button">
+                            Search
+                          </a>
+                        </div>
+                      </div>
+                </section>
+                <section class="section search-card-set">
+                    
+                </section>
+            </div>
+        </div>
+    </div>
+    <div class="container" style="position: fixed; right: 0; top: 200px; margin-right: 50px;">
+        <section class="section">
+            <div id="datepicker"></div>
+        </section>
+        <section>
+            <article class="message is-warning">
+                <div class="message-header">
+                  <p>Ingredients picked</p>
+                </div>
+                <div class="message-body">
+                  <div class="card-set">
+                    <div class="card">this is a card</div>
                   </div>
                 </div>
-              </div>
-        </nav>
-        
-        <div class="column is-2 tile is-parent mt-6" style="position: fixed;">
-            <article class="tile is-child notification is-warning">
-                <div class="content">
-                    <p class="title">Tall tile</p>
-                    <p class="subtitle">With even more content</p>
-                    <div class="content">
-                    <!-- Content -->
-                    </div>
+                <div class="message-header">
+                    <h1 class="subtitle">Total Calories:</h1>
+                    <button class="button is-danger">clear</button>
                 </div>
-            </article>
-        </div>
-
-        <div class="container">
-            
-            <div class="columns">
-                <div class="column is-2 empty-left-bar"></div>
-                <div class="column">
-                    <div class="diet-type m-3">
-                        <p class="font-large">Choose your Diet!</p>
-                        <div class="buttons are-medium">
-                            <button class="button is-warning">Low-Carb</button>
-                            <button class="button is-warning">Low-Fat</button>
-                            <button class="button is-warning">High-Protein</button>
-                            <button class="button is-warning">Balanced</button>
-                        </div>
-                    </div>
-                    <div class="meal-type m-3">
-                        <p class="font-large">What meals are we having today?</p>
-                        <div class="buttons are-medium">
-                            <button class="button is-warning">Breakfast</button>
-                            <button class="button is-warning">Lunch</button>
-                            <button class="button is-warning">Dinner</button>
-                            <button class="button is-warning">Snacks</button>
-                        </div>
-                    </div>
-                    <div class="ingredients m-3">
-                        <p class="font-medium">What ingredients are we working with?</p>
-                        <div class="container">
-                            <div class="field has-addons">
-                                <div class="control">
-                                  <input class="input" type="text" placeholder="Pick a food">
-                                </div>
-                                <div class="control">
-                                  <a class="button is-warning">
-                                    Search
-                                  </a>
-                                </div>
-                              </div>
-                        </div>
-                        <div class="container">
-                            <div class="neutrition info content">
-                                <!-- Content -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="side-bar-right column is-one-quarter tile is-vertical">
-                    <div class="disply-image tile is-parent is-vertical mt-6">
-                        <figure class="image is-4by3">
-                            <img src="https://bulma.io/images/placeholders/640x480.png">
-                        </figure>
-                    </div>
-
-                    <div class="calendar tile is-parent is-vertical mt-3">
-                        <div class="saved-meal tile is-child notification is-warning">
-                            <p class="title">Saved Meal</p>
-                            <div class="content">
-                                <!-- Content -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
+              </article>
+        </section>
+    </div>
     <script src="./assets/js/script.js"></script>
 </body>
 </html>
