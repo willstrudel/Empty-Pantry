@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./assets/CSS/reset.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="./assets/CSS/style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar is-warning">
+            <div class="">
+                <p class="font-large">Empty Pantry</p>
+            </div>
+            <div class="navbar-end">
+                <div class="navbar-item has-dropdown is-hoverable">
+                  <a class="navbar-link">
+                    Dropdown
+                  </a>
+          
+                  <div class="navbar-dropdown is-right">
+                    <a class="navbar-item">
+                      Overview
+                    </a>
+                    <a class="navbar-item">
+                      Elements
+                    </a>
+                    <a class="navbar-item">
+                      Components
+                    </a>
+                    <hr class="navbar-divider">
+                    <div class="navbar-item">
+                      Version 0.9.3
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </nav>
+        
+        <div class="column is-2 tile is-parent mt-6" style="position: fixed;">
+            <article class="tile is-child notification is-warning">
+                <div class="content">
+                    <p class="title">Tall tile</p>
+                    <p class="subtitle">With even more content</p>
+                    <div class="content">
+                    <!-- Content -->
+                    </div>
+                </div>
+            </article>
+        </div>
+
+        <div class="container">
+            
+            <div class="columns">
+                <div class="column is-2 empty-left-bar"></div>
+                <div class="column">
+                    <div class="diet-type m-3">
+                        <p class="font-large">Choose your Diet!</p>
+                        <div class="buttons are-medium">
+                            <button class="button is-warning">Low-Carb</button>
+                            <button class="button is-warning">Low-Fat</button>
+                            <button class="button is-warning">High-Protein</button>
+                            <button class="button is-warning">Balanced</button>
+                        </div>
+                    </div>
+                    <div class="meal-type m-3">
+                        <p class="font-large">What meals are we having today?</p>
+                        <div class="buttons are-medium">
+                            <button class="button is-warning">Breakfast</button>
+                            <button class="button is-warning">Lunch</button>
+                            <button class="button is-warning">Dinner</button>
+                            <button class="button is-warning">Snacks</button>
+                        </div>
+                    </div>
+                    <div class="ingredients m-3">
+                        <p class="font-medium">What ingredients are we working with?</p>
+                        <div class="container">
+                            <div class="field has-addons">
+                                <div class="control">
+                                  <input class="input" type="text" placeholder="Pick a food">
+                                </div>
+                                <div class="control">
+                                  <a class="button is-warning">
+                                    Search
+                                  </a>
+                                </div>
+                              </div>
+                        </div>
+                        <div class="container">
+                            <div class="neutrition info content">
+                                <!-- Content -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="side-bar-right column is-one-quarter tile is-vertical">
+                    <div class="disply-image tile is-parent is-vertical mt-6">
+                        <figure class="image is-4by3">
+                            <img src="https://bulma.io/images/placeholders/640x480.png">
+                        </figure>
+                    </div>
+
+                    <div class="calendar tile is-parent is-vertical mt-3">
+                        <div class="saved-meal tile is-child notification is-warning">
+                            <p class="title">Saved Meal</p>
+                            <div class="content">
+                                <!-- Content -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <script src="./assets/js/script.js"></script>
+</body>
+</html>
