@@ -44,3 +44,12 @@ function searchReceipeData() {
       $(".result-card-container").removeClass("is-invisible"); //makes the cards visible, when the user searches for meals.
     });
 }
+
+const storageInput = document.querySelector( '.storage');
+const text = document.querySelector ('.text');
+const button = document.querySelector('.button');
+
+storageInput.addEventListener('input', letter => {
+     console.log(letter)
+  text.textContent = letter.target.value
+})
