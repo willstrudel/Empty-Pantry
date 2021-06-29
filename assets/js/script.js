@@ -1,4 +1,5 @@
-//Search Button
+//Declare global variables
+let body = document.body;
 let searchBtn = document.querySelector("#search");
 
 //Event Listener to search for recipe
@@ -38,9 +39,39 @@ function searchReceipeData() {
         document.getElementById("cuisine-" + i).innerHTML =
           "Cuisine: " + data.hits[i].recipe.cuisineType;
         document.getElementById("image-" + i).src = data.hits[i].recipe.image;
-        console.log(data.hits[i].recipe.digest); //Array of nutritional content to be rendered in the modal
-        console.log(data.hits[i].recipe.ingredientLines); //Array of ingredients to be rendered in the modal
+        let nutritionData = data.hits[i].recipe.digest; //nutrional label list
+        let receipeData = data.hits[i].recipe.ingredientLines.toString(); //recipe list
+        modalDataGenerator(nutritionData, receipeData); //function create a table for the modal
+        
       }
       $(".result-card-container").removeClass("is-invisible"); //makes the cards visible, when the user searches for meals.
     });
+}
+
+//Generates a table that contains a recipe and nutritional label
+function modalDataGenerator(nutritionData, receipeData) {
+  let tbl = document.createElement("table");
+  tbl.style.width = "200px";
+  tbl.style.width = "200px";
+  tbl.style.fontSize = "10px";
+  tbl.style.border = "1px solid black";
+  let tr = tbl.insertRow();
+  let td = tr.insertCell();
+  td.appendChild(document.createTextNode('Ingredient List: ' + receipeData))
+  let tr2 = tbl.insertRow();
+  let td2 = tr2.insertCell();
+  td2.appendChild(document.createTextNode('Nutritional Label'))
+  for (let i = 0; i < nutritionData.length; i++) {
+    let tr3 = tbl.insertRow();
+    let td3 = tr3.insertCell();
+    td3.appendChild(
+      document.createTextNode(
+        nutritionData[i].label +
+          ": " +
+          Math.floor(nutritionData[i].total) +
+          nutritionData[i].unit
+      )
+    );
+  }
+  body.appendChild(tbl);
 }
