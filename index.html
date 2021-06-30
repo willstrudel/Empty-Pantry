@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,80 +13,107 @@
     <link rel="stylesheet" href="./assets/CSS/style.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="./assets/CSS/reset.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+  <link rel="stylesheet" href="./assets/CSS/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
+
 <body>
-    <nav class="navbar is-warning" role="navigation" aria-label="main navigation">
-        <div class="navbar-menu">
-          <a class="navbar-item" href="https://bulma.io">
-            <img src="" alt="logo" width="" height="">
-          </a>
-          <div class="navbar-end">
-              <p class="title">Empty Pantry</p>
+  <nav class="navbar is-warning" role="navigation" aria-label="main navigation">
+    <div class="navbar-menu">
+      <a class="navbar-item" href="https://bulma.io">
+        <img src="" alt="logo" width="" height="">
+      </a>
+      <div class="navbar-end">
+        <p class="title">Empty Pantry</p>
+      </div>
+    </div>
+  </nav>
+  <div class="container">
+    <div class="columns">
+      <div class="column is-three-Quartder">
+        <!-- Diet Type Choice -->
+        <section class="section">
+          <h1 class="title">Choose your diet!</h1>
+          <div class="field">
+            <div class="control">
+              <div class="select is-primary">
+                <select id='diet-type'>
+                  <option value ='balanced'>Balanced</option>
+                  <option value='low-carb'>Low-Carb</option>
+                  <option value='low-fat'>Low-Fat</option>
+                  <option value='high-protein'>High-Protein</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Meal Type Choice-->
+        <section class="section">
+          <h1 class="title">Choose your meal type!</h1>
+          <div class="field">
+            <div class="control">
+              <div class="select is-primary">
+                <select id='meal-type'>
+                  <option value='BreakFast'>BreakFast</option>
+                  <option value='Lunch'>Lunch</option>
+                  <option value='Dinner'>Dinner</option>
+                  <option value='Snacks'>Snacks</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Input area for for ingredient choice -->
+        <section class="section">
+          <h1 class="title">What ingredients are we working with?</h1>
+          <div class="field has-addons">
+            <div class="control">
+              <input class="input" id='user-ingredient-pick' type="text" placeholder="Choose your ingredient" value="">
+            </div>
+            <div class="control">
+              <a class="button" id='search'>
+                Search
+              </a>
+            </div>
+          </div>
+        </section>
+        
+        <section class="section result-card-container">
+        </section>
+
+      </div>
+    </div>
+  </div>
+  <div class="container" style="position: fixed; right: 0; top: 200px; margin-right: 50px;">
+    <section class="section">
+      <div id="datepicker"></div>
+    </section>
+    <section>
+      <article class="message is-warning">
+        <div class="message-header ingredient-picked">
+          <p>Ingredients picked</p>
+        </div>
+        <div class="message-body">
+          <div class="card-set">
+
           </div>
         </div>
-    </nav>
-
-    <div class="container">
-        <div class="columns">
-            <div class="column is-three-Quartder">
-                <section class="section">
-                    <h1 class="title">Choose your diet!</h1>
-                    <div class="buttons are-medium">
-                        <button class="button btn-LC">Low-Carb</button>
-                        <button class="button btn-LF">Low-Fat</button>
-                        <button class="button btn-HP">High-Protein</button>
-                        <button class="button btn-BL">Balanced</button>
-                    </div>
-                </section>
-                <section class="section">
-                    <h1 class="title">What meals are we having today?</h1>
-                    <div class="buttons are-medium">
-                        <button class="button btn-BF">Breakfast</button>
-                        <button class="button btn-LC">Lunch</button>
-                        <button class="button btn-DN">Dinner</button>
-                        <button class="button btn-SK">Snack</button>
-                    </div>
-                </section>
-                <section class="section">
-                    <h1 class="title">What ingredients are we working with?</h1>
-                    <div class="field has-addons">
-                        <div class="control">
-                          <input class="input" type="text" placeholder="Choose your ingredient">
-                        </div>
-                        <div class="control">
-                          <a class="button">
-                            Search
-                          </a>
-                        </div>
-                      </div>
-                </section>
-                <section class="section search-card-set">
-                    
-                </section>
-            </div>
+        <div class="message-header">
+          <h1 class="subtitle">Total Calories:</h1>
+          <button class="button is-danger btnClear">clear</button>
         </div>
-    </div>
-    <div class="container" style="position: fixed; right: 0; top: 200px; margin-right: 50px;">
-        <section class="section">
-            <div id="datepicker"></div>
-        </section>
-        <section>
-            <article class="message is-warning">
-                <div class="message-header">
-                  <p>Ingredients picked</p>
-                </div>
-                <div class="message-body">
-                  <div class="card-set">
-                    <div class="card">this is a card</div>
-                  </div>
-                </div>
-                <div class="message-header">
-                    <h1 class="subtitle">Total Calories:</h1>
-                    <button class="button is-danger">clear</button>
-                </div>
-              </article>
-        </section>
-    </div>
-    <script src="./assets/js/script.js"></script>
+      </article>
+    </section>
+  </div>
+  <script src="./assets/js/script.js"></script>
 </body>
+
 </html>
