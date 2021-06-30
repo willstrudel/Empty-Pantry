@@ -27,6 +27,7 @@ function searchReceipeData() {
     "&mealType=" +
     selectedMealType;
 
+    // fetching url 
   fetch(requestUrl)
     .then(function (response) {
       return response.json();
@@ -156,73 +157,90 @@ $(function () {
   });
 });
 
-var ingredientPicked = $(".ingredient-picked");
-function loadShoppingCart() {
+//selector for picked ingredients 
+var ingredientPicked = $('.ingredient-picked');
+// function to load all ingredient picked on the right side bar
+function loadShoppingCart(){
+  //load local storage
   var savedIngredients = localStorage.getItem(selectedDate);
-  if (savedIngredients !== null) {
-    var ingredientArr = savedIngredients.split(",");
-    for (var i = 0; i < ingredientArr.length; i++) {
-      if (i % 2 === 0) {
+  //check if the local storage is empty
+  if(savedIngredients !== null){
+    var ingredientArr = savedIngredients.split(',');
+    // creating cards in the shopping cart
+    for(var i =0; i<ingredientArr.length; i++){
+      if(i%2 === 0){
         var name = ingredientArr[i];
-      } else {
+      }else{
         var calories = ingredientArr[i];
-        if ($(".id-" + i).length) {
-        } else {
-          var itemDiv = $("<div>");
-          var itemName = $("<p>");
+        if($('.id-'+i).length){
+        }else{
+          var itemDiv = $('<div>');
+          var itemName = $('<p>');
           itemName.text(name);
-          itemName.addClass("id-" + i);
+          itemName.addClass('id-'+i);
           itemDiv.append(itemName);
-          var itemCal = $("<p>");
+          var itemCal = $('<p>');
           itemCal.text(calories);
           itemDiv.append(itemCal);
-          var detailBtn = $("<button>");
-          detailBtn.text("Details");
+          var detailBtn = $('<button>');
+          detailBtn.text('Details');
+          detailBtn.attr('id','detailBtn');
           itemDiv.append(detailBtn);
-          var removeBtn = $("<button>");
-          removeBtn.text("Remove");
+          var removeBtn = $('<button>');
+          removeBtn.attr('id','removeBtn');
+          removeBtn.text('Remove');
           itemDiv.append(removeBtn);
           ingredientPicked.append(itemDiv);
         }
       }
     }
   }
+  
 }
 
 // function to run when save button is clicked
-resultCardContainer.on("click", ".saveBtn", function () {
-  var name = $(this)
-    .parent()
-    .siblings()
-    .eq(1)
-    .children()
-    .first()
-    .children()
-    .first()
-    .children(".name")
-    .text();
-  var calories = $(this)
-    .parent()
-    .siblings()
-    .eq(1)
-    .children()
-    .first()
-    .children()
-    .first()
-    .children(".calories")
-    .text()
-    .split(" ")[1];
+resultCardContainer.on('click','.saveBtn',function(){
+  //get the name of clicked ingredient
+  var name = $(this).parent().siblings().eq(1).children().first().children().first().children('.name').text();
+  //get the calories of the stored ingredient
+  var calories = $(this).parent().siblings().eq(1).children().first().children().first().children('.calories').text().split(' ')[1];
+ //pull the local storage for the selected date
   var selectedDateStorage = localStorage.getItem(selectedDate);
-  var arrTemp = [name, calories];
-  if (selectedDateStorage === null) {
-    localStorage.setItem(selectedDate, arrTemp);
-  } else if (selectedDateStorage.indexOf(name) < 0) {
-    localStorage.setItem(selectedDate, selectedDateStorage + "," + arrTemp);
+  var arrTemp = [name,calories];
+  //store the saved ingredient to local storage on selected date
+  if(selectedDateStorage === null){
+    localStorage.setItem(selectedDate,arrTemp);
+  }else if (selectedDateStorage.indexOf(name)<0){
+    localStorage.setItem(selectedDate,selectedDateStorage+','+arrTemp);
   }
+  //update the shopping cart
   loadShoppingCart();
 });
 
-$(".btnClear").on("click", function () {
+//function to run when detail button is clicked
+resultCardContainer.on('click','.detailBtn',function(){
+  console.log(this);
+})
+
+//when clear button is clicked, clear local storage on selected Date and clear shopping cart
+$('.btnClear').on('click',function(){
   localStorage.removeItem(selectedDate);
   ingredientPicked.empty();
-});
+})
+
+//when a saved item's remove button is clicked
+ingredientPicked.on('click','#removeBtn',function(){
+  //delet the div 
+  var elementsToClear = $(this).siblings().first().attr('class').split('-')[1];
+  console.log(elementsToClear);
+  $(this).parent().empty();
+  var stored = localStorage.getItem(selectedDate).split(',');
+  //remove the corresponding local storage name and calories
+  if(stored.length == 2){
+    localStorage.removeItem(selectedDate);
+  }else{
+    stored.splice((elementsToClear-1),1);
+    stored.splice(elementsToClear-1,1);
+    localStorage.setItem(selectedDate,stored);
+  }
+})
