@@ -32,6 +32,7 @@ function searchReceipeData() {
       return response.json();
     })
     .then(function (data) {
+      resultCardContainer.empty();
       for(let i=0; i < 4; i++){
         //initializing card div
         var cardDiv = $('<div>').addClass('');
@@ -150,5 +151,3 @@ $('.btnClear').on('click',function(){
   localStorage.removeItem(selectedDate);
   ingredientPicked.empty();
 })
-
-loadShoppingCart();
