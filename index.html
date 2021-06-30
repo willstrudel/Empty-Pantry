@@ -1,19 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Empty Pantry</title>
+  <!-- jquery/bootstrap/bulma -->
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="./assets/CSS/reset.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./assets/CSS/reset.css">
   <link rel="stylesheet" href="./assets/CSS/style.css">
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
-
 <body>
   <nav class="navbar is-warning" role="navigation" aria-label="main navigation">
     <div class="navbar-menu">
@@ -35,7 +33,7 @@
             <div class="control">
               <div class="select is-primary">
                 <select id='diet-type'>
-                  <option value ='balanced'>Balanced</option>
+                  <option value='balanced'>Balanced</option>
                   <option value='low-carb'>Low-Carb</option>
                   <option value='low-fat'>Low-Fat</option>
                   <option value='high-protein'>High-Protein</option>
@@ -74,10 +72,9 @@
             </div>
           </div>
         </section>
-        
         <section class="section result-card-container">
+          <!-- The cards are being appended here. -->
         </section>
-
       </div>
     </div>
   </div>
@@ -94,107 +91,33 @@
           <div class="card-set">
 
           </div>
-        </div>
-        <div class="message-header">
-          <h1 class="subtitle">Total Calories:</h1>
-          <button class="button is-danger">clear</button>
-        </div>
+          <div class="message-header">
+            <h1 class="subtitle">Total Calories:</h1>
+            <button class="button is-danger">clear</button>
+          </div>
       </article>
     </section>
   </div>
+  <!-- jquery & bootstrap script -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="./assets/js/script.js"></script>
 </body>
-
+<!-- CREATE A MODAL -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+            aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Meal Information</h4>
+      </div>
+      <div class="modal-body">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 </html>
-
-
-<section class="section search-card-set result-card-container is-invisible">
-  <!-- Result Card 01 -->
-  <div class="card">
-    <div class="card-image">
-      <figure class="image is-4by3">
-        <img src="" id='image-0' alt="Placeholder image">
-      </figure>
-    </div>
-    <div class="card-content">
-      <div class="media">
-        <div class="media-content">
-          <p class="title is-4" id='name-0'></p>
-          <p class="subtitle is-6" id="cuisine-0"></p>
-          <p class="subtitle is-6" id='calorie-0'></p>
-        </div>
-      </div>
-    </div>
-    <footer class="card-footer">
-      <a href="#" class="card-footer-item save-0">Save</a>
-      <a href="#" class="card-footer-item">Clear</a>
-      <a href="#" class="card-footer-item">Info</a>
-    </footer>
-  </div>
-  <!-- Result Card 02 -->
-  <div class="card">
-    <div class="card-image">
-      <figure class="image is-4by3">
-        <img src="" id='image-1' alt="Placeholder image">
-      </figure>
-    </div>
-    <div class="card-content">
-      <div class="media">
-        <div class="media-content">
-          <p class="title is-4" id='name-1'>Meal Name</p>
-          <p class="subtitle is-6" id='cuisine-1'>Cuisine Type</p>
-          <p class="subtitle is-6" id='calorie-1'>Calories</p>
-        </div>
-      </div>
-    </div>
-    <footer class="card-footer">
-      <a href="#" class="card-footer-item save-1">Save</a>
-      <a href="#" class="card-footer-item">Clear</a>
-      <a href="#" class="card-footer-item">Info</a>
-    </footer>
-  </div>
-  <!-- Result Card 03 -->
-  <div class="card">
-    <div class="card-image">
-      <figure class="image is-4by3">
-        <img src="" id='image-2' alt="Placeholder image">
-      </figure>
-    </div>
-    <div class="card-content">
-      <div class="media">
-        <div class="media-content">
-          <p class="title is-4" id='name-2'>Meal Name</p>
-          <p class="subtitle is-6" id='cuisine-2'>Cuisine Type</p>
-          <p class="subtitle is-6" id='calorie-2'>Calories</p>
-        </div>
-      </div>
-    </div>
-    <footer class="card-footer">
-      <a href="#" class="card-footer-item save-2">Save</a>
-      <a href="#" class="card-footer-item">Clear</a>
-      <a href="#" class="card-footer-item">Info</a>
-    </footer>
-  </div>
-  <!-- Result Card 04 -->
-  <div class="card">
-    <div class="card-image">
-      <figure class="image is-4by3">
-        <img src="" id='image-3' alt="Placeholder image">
-      </figure>
-    </div>
-    <div class="card-content">
-      <div class="media">
-        <div class="media-content">
-          <p class="title is-4" id="name-3">Meal Name</p>
-          <p class="subtitle is-6" id='cuisine-3'>Cuisine Type</p>
-          <p class="subtitle is-6" id='calorie-3'>Calories</p>
-        </div>
-      </div>
-    </div>
-    <footer class="card-footer">
-      <a href="#" class="card-footer-item save-3">Save</a>
-      <a href="#" class="card-footer-item">Clear</a>
-      <a href="#" class="card-footer-item">Info</a>
-    </footer>
-  </div>
-</section>
