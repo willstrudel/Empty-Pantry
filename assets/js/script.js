@@ -1,7 +1,6 @@
 var calendarEl = $("#datepicker");
 var selectedDate;
 var resultCardContainer = $(".result-card-container");
-
 //Search Button
 let searchBtn = document.querySelector("#search");
 
@@ -33,6 +32,7 @@ function searchReceipeData() {
       return response.json();
     })
     .then(function (data) {
+      resultCardContainer.empty();
       for (let i = 0; i < 4; i++) {
         //initializing card div
         var cardDiv = $("<div>").addClass("");
@@ -54,21 +54,12 @@ function searchReceipeData() {
         var name = $("<p>");
         name.addClass("title is-4 name");
         name.text(data.hits[i].recipe.label);
-<<<<<<< HEAD
         var cuisine = $("<p>");
         cuisine.addClass("subtitle is-6");
         cuisine.text("cuisine: " + data.hits[i].recipe.cuisineType);
         var calorie = $("<p>");
-        calorie.addClass("subtitle is-6");
+        calorie.addClass("subtitle is-6 calories");
         calorie.text("calories: " + Math.floor(data.hits[i].recipe.calories));
-=======
-        var cuisine = $('<p>');
-        cuisine.addClass('subtitle is-6');
-        cuisine.text('cuisine: '+data.hits[i].recipe.cuisineType);
-        var calorie = $('<p>');
-        calorie.addClass('subtitle is-6 calories');
-        calorie.text('calories: '+Math.floor(data.hits[i].recipe.calories));
->>>>>>> 53c9ba502feaaeac3f7f7ac016cd0da5a84a2121
         mediaContent.append(name);
         mediaContent.append(cuisine);
         mediaContent.append(calorie);
@@ -77,18 +68,17 @@ function searchReceipeData() {
         //create card footer div
         var footerDiv = $("<footer>");
         footerDiv.addClass("card-footer");
-        let saveBtn = $("<button>");
+        var saveBtn = $("<button>");
         saveBtn.addClass("card-footer-item saveBtn");
         saveBtn.text("Save");
-        let detailsBtn = document.createElement("button");
-        detailsBtn.textContent = "Details";
-        detailsBtn.setAttribute("class", "card-footer-item detailBtn");
+        var detailsBtn = $("<button>");
+        detailsBtn.addClass("card-footer-item detailBtn");
+        detailsBtn.text("Details");
         footerDiv.append(saveBtn);
         footerDiv.append(detailsBtn);
         cardDiv.append(footerDiv);
         // append the card to the result card container section
         resultCardContainer.append(cardDiv);
-
         //STORE 'NUTRITION LABEL' in data attribute
         var nutrition_str = encodeURIComponent(
           JSON.stringify(data.hits[i].recipe.digest)
@@ -104,7 +94,6 @@ function searchReceipeData() {
       }
     });
 }
-<<<<<<< HEAD
 
 //ONCLICK LISTENER FOR DETAIL BUTTON
 $(document).on("click", ".detailBtn", function (e) {
@@ -124,65 +113,6 @@ $(document).on("click", ".detailBtn", function (e) {
   //Call the table generator function and append table to Modal
   $(".modal-body").append(modalDataGenerator(recipe_object, nutrition_object));
   $("#myModal").modal("show");
-=======
-// creating a datepicker calendar
-$( function() {
-  selectedDate = calendarEl.datepicker({ dateFormat: "yy-mm-dd" }).val();
-  console.log(selectedDate);
-  calendarEl.on("change",function(){
-    selectedDate = $(this).val();
-    ingredientPicked.empty();
-    loadShoppingCart();
-});
-});
-
-var ingredientPicked = $('.ingredient-picked');
-function loadShoppingCart(){
-  var savedIngredients = localStorage.getItem(selectedDate);
-  if(savedIngredients !== null){
-    var ingredientArr = savedIngredients.split(',');
-    for(var i =0; i<ingredientArr.length; i++){
-      if(i%2 === 0){
-        var name = ingredientArr[i];
-      }else{
-        var calories = ingredientArr[i];
-        if($('.id-'+i).length){
-        }else{
-          var itemDiv = $('<div>');
-          var itemName = $('<p>');
-          itemName.text(name);
-          itemName.addClass('id-'+i);
-          itemDiv.append(itemName);
-          var itemCal = $('<p>');
-          itemCal.text(calories);
-          itemDiv.append(itemCal);
-          var detailBtn = $('<button>');
-          detailBtn.text('Details');
-          itemDiv.append(detailBtn);
-          var removeBtn = $('<button>');
-          removeBtn.text('Remove');
-          itemDiv.append(removeBtn);
-          ingredientPicked.append(itemDiv);
-        }
-      }
-    }
-  }
-  
-}
-
-// function to run when save button is clicked
-resultCardContainer.on('click','.saveBtn',function(){
-  var name = $(this).parent().siblings().eq(1).children().first().children().first().children('.name').text();
-  var calories = $(this).parent().siblings().eq(1).children().first().children().first().children('.calories').text().split(' ')[1];
-  var selectedDateStorage = localStorage.getItem(selectedDate);
-  var arrTemp = [name,calories];
-  if(selectedDateStorage === null){
-    localStorage.setItem(selectedDate,arrTemp);
-  }else if (selectedDateStorage.indexOf(name)<0){
-    localStorage.setItem(selectedDate,selectedDateStorage+','+arrTemp);
-  }
-  loadShoppingCart();
->>>>>>> 53c9ba502feaaeac3f7f7ac016cd0da5a84a2121
 });
 
 // This function generates a table that contains a recipe list and nutritional label
@@ -216,22 +146,83 @@ function modalDataGenerator(recipe_object, nutrition_object) {
 }
 
 // creating a datepicker calendar
-// $( function() {
-//   selectedDate = calendarEl.datepicker({ dateFormat: "yy-mm-dd" }).val();
-//   console.log(selectedDate);
-//   calendarEl.on("change",function(){
-//     selectedDate = $(this).val();
-//     console.log(selectedDate);
-// });
-// });
+$(function () {
+  selectedDate = calendarEl.datepicker({ dateFormat: "yy-mm-dd" }).val();
+  console.log(selectedDate);
+  calendarEl.on("change", function () {
+    selectedDate = $(this).val();
+    ingredientPicked.empty();
+    loadShoppingCart();
+  });
+});
 
+var ingredientPicked = $(".ingredient-picked");
+function loadShoppingCart() {
+  var savedIngredients = localStorage.getItem(selectedDate);
+  if (savedIngredients !== null) {
+    var ingredientArr = savedIngredients.split(",");
+    for (var i = 0; i < ingredientArr.length; i++) {
+      if (i % 2 === 0) {
+        var name = ingredientArr[i];
+      } else {
+        var calories = ingredientArr[i];
+        if ($(".id-" + i).length) {
+        } else {
+          var itemDiv = $("<div>");
+          var itemName = $("<p>");
+          itemName.text(name);
+          itemName.addClass("id-" + i);
+          itemDiv.append(itemName);
+          var itemCal = $("<p>");
+          itemCal.text(calories);
+          itemDiv.append(itemCal);
+          var detailBtn = $("<button>");
+          detailBtn.text("Details");
+          itemDiv.append(detailBtn);
+          var removeBtn = $("<button>");
+          removeBtn.text("Remove");
+          itemDiv.append(removeBtn);
+          ingredientPicked.append(itemDiv);
+        }
+      }
+    }
+  }
+}
 
 // function to run when save button is clicked
-resultCardContainer.on("click", ".saveBtn", function () {});
+resultCardContainer.on("click", ".saveBtn", function () {
+  var name = $(this)
+    .parent()
+    .siblings()
+    .eq(1)
+    .children()
+    .first()
+    .children()
+    .first()
+    .children(".name")
+    .text();
+  var calories = $(this)
+    .parent()
+    .siblings()
+    .eq(1)
+    .children()
+    .first()
+    .children()
+    .first()
+    .children(".calories")
+    .text()
+    .split(" ")[1];
+  var selectedDateStorage = localStorage.getItem(selectedDate);
+  var arrTemp = [name, calories];
+  if (selectedDateStorage === null) {
+    localStorage.setItem(selectedDate, arrTemp);
+  } else if (selectedDateStorage.indexOf(name) < 0) {
+    localStorage.setItem(selectedDate, selectedDateStorage + "," + arrTemp);
+  }
+  loadShoppingCart();
+});
 
-$('.btnClear').on('click',function(){
+$(".btnClear").on("click", function () {
   localStorage.removeItem(selectedDate);
   ingredientPicked.empty();
-})
-
-loadShoppingCart();
+});
