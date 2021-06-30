@@ -71,9 +71,9 @@ function searchReceipeData() {
         var saveBtn = $("<button>");
         saveBtn.addClass("card-footer-item saveBtn");
         saveBtn.text("Save");
-        var detailsBtn = $("<button>");
-        detailsBtn.addClass("card-footer-item detailBtn");
-        detailsBtn.text("Details");
+        let detailsBtn = document.createElement("button");
+        detailsBtn.textContent = "Details";
+        detailsBtn.setAttribute("class", "card-footer-item detailBtn");
         footerDiv.append(saveBtn);
         footerDiv.append(detailsBtn);
         cardDiv.append(footerDiv);
@@ -112,7 +112,7 @@ $(document).on("click", ".detailBtn", function (e) {
   let recipe_object = JSON.parse(decodeURIComponent(recipe_str));
   //Call the table generator function and append table to Modal
   $(".modal-body").append(modalDataGenerator(recipe_object, nutrition_object));
-  $("#myModal").modal("show");
+  $("#myModal").modal("show")
 });
 
 // This function generates a table that contains a recipe list and nutritional label
