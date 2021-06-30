@@ -1,9 +1,11 @@
+var calendarEl = $("#datepicker");
+var selectedDate;
+var resultCardContainer = $('.result-card-container');
 //Search Button
 let searchBtn = document.querySelector("#search");
 
 //Event Listener to search for recipe
 searchBtn.addEventListener("click", searchReceipeData);
-
 //This function call the Recipe API and render the results in the page
 function searchReceipeData() {
   let ingredientPick = $("#user-ingredient-pick").val();
@@ -30,26 +32,98 @@ function searchReceipeData() {
       return response.json();
     })
     .then(function (data) {
-      for (let i = 0; i < 4; i++) {
-        document.getElementById("name-" + i).innerHTML =
-          data.hits[i].recipe.label;
-        document.getElementById("calorie-" + i).innerHTML =
-          "Calorie: " + Math.floor(data.hits[i].recipe.calories);
-        document.getElementById("cuisine-" + i).innerHTML =
-          "Cuisine: " + data.hits[i].recipe.cuisineType;
-        document.getElementById("image-" + i).src = data.hits[i].recipe.image;
-        console.log(data.hits[i].recipe.digest); //Array of nutritional content to be rendered in the modal
-        console.log(data.hits[i].recipe.ingredientLines); //Array of ingredients to be rendered in the modal
+      for(let i=0; i < 4; i++){
+        //initializing card div
+        var cardDiv = $('<div>').addClass('');
+        //create the image of the card
+        var cardImgDiv = $('<div>').addClass('card-image');
+        var imgFigure = $('<figure>').addClass('image is-4by3');
+        var imgEl = $('<img>');
+        imgEl.attr('src',data.hits[i].recipe.image);
+        imgEl.attr('alt','image not avaliable');
+        cardDiv.append(cardImgDiv.append(imgFigure.append(imgEl)));
+
+        //create card content div
+        var cardContentDiv = $('<div>');
+        cardContentDiv.addClass('card-content');
+        var mediaDiv = $('<div>');
+        mediaDiv.addClass('media');
+        var mediaContent = $('<div>');
+        mediaDiv.addClass('media-content');
+        var name = $('<p>');
+        name.addClass('title is-4 name');
+        name.text(data.hits[i].recipe.label);
+        var cuisine = $('<p>');
+        cuisine.addClass('subtitle is-6');
+        cuisine.text('cuisine: '+data.hits[i].recipe.cuisineType);
+        var calorie = $('<p>');
+        calorie.addClass('subtitle is-6');
+        calorie.text('calories: '+Math.floor(data.hits[i].recipe.calories));
+        mediaContent.append(name);
+        mediaContent.append(cuisine);
+        mediaContent.append(calorie);
+        cardDiv.append(cardContentDiv.append(mediaDiv.append(mediaContent)));
+        
+        //create card footer div
+        var footerDiv = $('<footer>');
+        footerDiv.addClass('card-footer');
+        var saveBtn = $('<button>');
+        saveBtn.addClass('card-footer-item saveBtn');
+        saveBtn.text('Save');
+        var detailsBtn = $('<button>');
+        detailsBtn.addClass('card-footer-item detailBtn');
+        detailsBtn.text('Details');
+        footerDiv.append(saveBtn);
+        footerDiv.append(detailsBtn);
+        cardDiv.append(footerDiv);
+        
+        // append the card to the result card container section 
+        resultCardContainer.append(cardDiv);
       }
-      $(".result-card-container").removeClass("is-invisible"); //makes the cards visible, when the user searches for meals.
     });
 }
+//local storage for meals
 
 const storageInput = document.querySelector( '.storage');
 const text = document.querySelector ('.text');
 const button = document.querySelector('.button');
+const storedInput = localStorage.getItem('textInput')
+
+if(storageInput) {
+  text.textContent = storedInput
+}
 
 storageInput.addEventListener('input', letter => {
-     console.log(letter)
+     //console.log(letter)
   text.textContent = letter.target.value
 })
+
+//saving info to local storage
+
+const saveToLocalStorage = () => {
+    localStorage.setItem('textinput', text.textContent)
+}
+
+button.addEventListener('click', saveToLocalStorage)
+
+// creating a datepicker calendar
+$( function() {
+  selectedDate = calendarEl.datepicker({ dateFormat: "yy-mm-dd" }).val();
+  console.log(selectedDate);
+  calendarEl.on("change",function(){
+    selectedDate = $(this).val();
+    console.log(selectedDate);
+});
+});
+
+// function to run when save button is clicked
+resultCardContainer.on('click','.saveBtn',function(){
+  console.log(this);
+});
+
+//function to run when detail button is clicked
+resultCardContainer.on('click','.detailBtn',function(){
+  console.log(this);
+})
+
+>>>>>>> 64e40658956778869b2fba8232ae792c02bff84b
