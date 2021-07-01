@@ -32,7 +32,7 @@ function searchReceipeData() {
     .then(function (data) {
       for (let i = 0; i < 4; i++) {
         document.getElementById("name-" + i).innerHTML =
-          data.hits[i].recipe.label;
+          data.hits[i].recipe.label; //console.log 
         document.getElementById("calorie-" + i).innerHTML =
           "Calorie: " + Math.floor(data.hits[i].recipe.calories);
         document.getElementById("cuisine-" + i).innerHTML =
