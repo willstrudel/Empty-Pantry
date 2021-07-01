@@ -5,8 +5,22 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Empty Pantry</title>
+
+  <title>Document</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="./assets/CSS/reset.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+  <link rel="stylesheet" href="./assets/CSS/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
   <!-- jquery/bootstrap/bulma -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Calligraffitti&family=Thasadith:wght@700&display=swap" rel="stylesheet"> 
   <link rel="stylesheet" href="./assets/CSS/reset.css">
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
@@ -16,25 +30,20 @@
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 
-<body id='body-click'>
-  <nav class="navbar is-warning" role="navigation" aria-label="main navigation">
+<body>
+  <nav class="navbar is-success" role="navigation" aria-label="main navigation">
     <div class="navbar-menu">
-      <a class="navbar-item" href="https://bulma.io">
-        <img src="" alt="logo" width="" height="">
-      </a>
+      <img src="./assets/css/EmptyPantry.png" alt="logo">
+      <div class="navbar-item"> 
+      </div>
       <div class="navbar-end">
         <p class="title">Empty Pantry</p>
       </div>
     </div>
   </nav>
-  <div class='animation'>Empty Pantry recipes are 
-    <span
-    class="txt-rotate"
-    data-period="2000"
-    data-rotate='[ "appetizing.", "divine.", "flavorful.", "delish.", "yummy!" ]'></span>
-  </div>
-  <div class='columns'>
-    <div class='column is-one-quarter'>
+
+  <div class="row-1">
+    <div class="col-lg-3">
       <section class="section">
         <h1 class="title">Choose your diet!</h1>
         <div class="field">
@@ -71,7 +80,7 @@
         <h1 class="title">What ingredients are we working with?</h1>
         <div class="field has-addons">
           <div class="control">
-            <input class="input" id='user-ingredient-pick' type="text" placeholder="Choose your ingredient" value=""> </input>
+            <input class="input" id='user-ingredient-pick' type="text" placeholder="Choose your ingredient" value="">
           </div>
           <div class="control">
             <a class="button" id='search'>
@@ -79,39 +88,47 @@
             </a>
           </div>
         </div>
-        <p1 id='error-message'>
-          </p2>
       </section>
     </div>
-    <div class='column is-half'>
-      <div class="container">
-        <section class="section result-card-container"></section>
+
+    <div class="row-2">
+      <div class="col-lg-6">
+        <div class="card-container">
+        <section class="section result-card-container">
+          <!-- The cards are being appended here. -->
+        </section>
+        </div>
       </div>
     </div>
-    <div class='column is-one-quarter'>
-        <section class="calendar">
-          <div id="datepicker"></div>
-        </section>
-        <section>
-          <article class="message is-warning">
-            <div class="message-header ingredient-picked">
-              <p>Ingredients picked</p>
-            </div>
-            <div class="message-body">
-              <div class="card-set"></div>
-            </div>
-            <div class="message-header">
-              <span class="subtitle"></span>
-              <button type="button" class="button is-success btnTotal">Total Calories</button>
-              <button class="button is-danger btnClear">clear</button>
-            </div>
-          </article>
-        </section>
+    
+    <div class="row-3">
+      <div class="col-lg-3">
+        <div class="calendar">
+          <section class="section">
+            <div id="datepicker"></div>
+          </section>
+          <section>
+            <article class="message is-success">
+              <div class="message-header ingredient-picked">
+                <p id="ingredients">Ingredients picked</p>
+              </div>
+              <div class="message-body">
+                <div class="card-set">
+                </div>
+              </div>
+              <div class="message-header">
+                <h1 class="subtitle">Total Calories:</h1>
+                <button class="button is-danger btnClear">clear</button>
+              </div>
+            </article>
+          </section>
+        </div>
+      </div>
     </div>
   </div>
-<!-- bootstrap script -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="./assets/js/script.js"></script>
+  <!-- bootstrap script -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="./assets/js/script.js"></script>
 </body>
 <!-- CREATE A MODAL -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
