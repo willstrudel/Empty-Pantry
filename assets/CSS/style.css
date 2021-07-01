@@ -1,40 +1,93 @@
-html, body { 
-    background: url(./EmptyPantry\ bg.jpg) no-repeat center center fixed;
-    position: absolute;
-    background-size: cover;
-    height: 100%;
-    width: 100%;
+html,
+body {
+  background: url(./EmptyPantry\ bg.jpg) no-repeat center center fixed;
+  position: absolute;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
 }
+
+/* Navbar styling */
+.navbar {
+  height: 90px;
+}
+
+p.title {
+  right: 200px;
+  font-size: 50px;
+  margin-top: 12px;
+  margin-right: 20px;
+  font-family: "Merienda", cursive;
+}
+
+.pantryLogo {
+  margin-top: 0px;
+  height: 0px;
+}
+
+img {
+  height: 90px;
+  width: auto;
+}
+
+/* End of Navbar styling */
+
+/* Animation Styling */
+
+.animation {
+  font-family: "Raleway", sans-serif;
+  font-weight: 200;
+  margin: 0.4em 0;
+  font-size: 4em;
+}
+
+.jumbotron {
+  position: relative;
+  width: 100vw;
+  margin: 0px;
+  padding: 0px;
+}
+.jumbotron .container {
+  position: relative;
+  z-index: 2;
+  color: #aaa;
+  font-size: 40px;
+  text-align: center;
+}
+.jumbotron:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("./EmptyPantry\ bg.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  filter: blur(5.5px);
+  transform: scale(1.1);
+}
+
+/* End of Animation styling */
 
 /* Card Styling */
 
 .card {
-    display: flex;
-    flex-direction: column;
-    width: 40%;
-    justify-content: space-around;
-    margin: 15px;
-    background-color: antiquewhite;
-    padding: 10px;
-    border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  justify-content: space-around;
+  margin: 15px;
+  background-color: antiquewhite;
+  padding: 10px;
+  border-radius: 5px;
 }
 
 .result-card-container {
-    display: flex;
-    flex-wrap: wrap;
-    width: 95%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
-
-
-/* .card-container {
-  justify-content: center;
-  display: inline-block;
-  background-color: antiquewhite;
-  margin-top: 50px; 
-  border-radius: 5px;
-  width: 600px;
-  height: auto;
-} */
 
 /* End of Card Styling */
 
@@ -45,7 +98,7 @@ html, body {
 }
 
 .modal-content {
-    background-color: antiquewhite;
+  background-color: antiquewhite;
 }
 
 .modal-table {
@@ -88,75 +141,68 @@ html, body {
 }
 /* End of Modal Styling */
 
-
-/* Calendar/ingredients */
+/* Calendar/ingredients styling */
 .calendar {
   position: absolute;
-  right: 50px; 
-  top: 46px; 
-  margin-right: 20px;
+  right: 50px;
+  top: 46px;
   border-radius: 8px;
   background-color: rgb(66, 199, 137);
   padding: 10px;
 }
 
 .ingredient-picked div {
-    font-size: 11px;
-    text-align: center;
-    color: black;
+  font-size: 11px;
+  text-align: center;
+  color: black;
 }
 
 .ingredient-picked {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .ingredient-picked div {
-    padding: 5px;
+  padding: 5px;
 }
 
 .ingredient-picked button {
-    padding: 5px;
+  padding: 5px;
 }
 
 .mini-container {
-    display: flex;
-    flex-direction: column;
-    width: 200px;
-    background-color: antiquewhite;
-    padding: 10px;
-    margin: 10px;
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  background-color: antiquewhite;
+  padding: 10px;
+  margin: 10px;
 }
 
-
-/* Navbar  */
-.navbar {
-  height: 90px;
+.message-header {
+  border-radius: 0px;
 }
 
-p.title {
-  right: 200px;
-  font-size: 40px;
-  margin-top: 12px;
-  margin-right: 20px;
-  font-family: 'Thasadith', sans-serif;
-  font-family: 'Thasadith', sans-serif;
+h1.subtitle {
+  color: white;
+  font-weight: bold;
+  font-size: 15px;
+  background-color: rgb(39, 133, 240);
+  padding: 5px;
+  border-radius: 3px;
 }
 
-
-.pantryLogo {
-  margin-top: 0px;
-  height: 0px;
+.btnClear {
+  height: 30px;
+  width: 50px;
+  font-size: 13px;
 }
 
-img {
-  height: 90px;
-  width: auto;
-}
+/* End of Calendar/ingredients styling */
 
 /* Options content */
 h1.title {
-  background-color:antiquewhite;
+  background-color: antiquewhite;
   width: 280px;
   border-radius: 5px;
   padding: 8px;
@@ -165,7 +211,7 @@ h1.title {
 #diet-type {
   width: 140px;
   font-size: 15px;
-} 
+}
 
 #meal-type {
   width: 140px;
@@ -184,21 +230,26 @@ h1.title {
   height: 38px;
 }
 
-.message-header {
-    border-radius: 0px;
-}
+/* End of Options content styling */
 
-h1.subtitle {
-    color: white;
-    font-weight: bold;
-    font-size: 15px;
-    background-color: rgb(39, 133, 240);
-    padding: 5px;
-    border-radius: 3px;
-}
+@media all and (max-width: 1200px) {
+  #datepicker {
+    display: flex;
+    justify-content: center;
+  }
 
-.btnClear {
-    height: 30px;
-    width: 50px;
-    font-size: 13px;
+  .result-card-container {
+    padding-right:0px;
+  }
+
+  .jumbotron .container {
+    font-size: 30px;
+  }
+
+  .calendar {
+    position: unset;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
