@@ -158,12 +158,14 @@ function modalDataGenerator(recipe_object, nutrition_object) {
 
 // creating a datepicker calendar
 $(function () {
+  //default the selectedDate to today's date
   selectedDate = calendarEl.datepicker({ dateFormat: "yy-mm-dd" }).val();
-  console.log(selectedDate);
+  //functions to run when selected on a different date
   calendarEl.on("change", function () {
     selectedDate = $(this).val();
     ingredientPicked.empty();
     loadShoppingCart();
+    totalCalories();
   });
 });
 
@@ -183,6 +185,7 @@ function loadShoppingCart() {
 //Create saved ingredient content
 function saveToList(key) {
   var localItem = localStorage.getItem(key);
+  //parse the localitem into object
   var localItem_object = JSON.parse(localItem);
   var name = localItem_object.name;
   var index = localItem_object.index;
@@ -273,7 +276,8 @@ $(".btnClear").on("click", function () {
       localStorage.removeItem(selectedDate + "-" + i);
     }
   }
-
+  //remove saved list
+  totalCalories();
   ingredientPicked.empty();
 });
 
