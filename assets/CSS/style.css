@@ -1,6 +1,6 @@
 body { 
     background: url(./EmptyPantry\ bg.jpg) no-repeat center center fixed;
-    position: relative;
+    position: absolute;
     background-size: cover;
     height: 100%;
     width: 100%;
