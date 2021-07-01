@@ -33,7 +33,8 @@ function searchReceipeData() {
       return response.json();
     })
     .then(function (data) {
-      if(data.count !== 0 || data.status !== 404 || data.hits[0] !== null){
+      $('.invalid-input').text('');
+      if(data.count !== 0){
         resultCardContainer.empty();
       for (let i = 0; i < 4; i++) {
         //initializing card div
@@ -97,9 +98,8 @@ function searchReceipeData() {
     }else{
     $('.invalid-input').text('Invalid input, please try again');
         resultCardContainer.empty();
-}
-      
-    });
+    }
+  });
 }
 
 //ONCLICK LISTENER FOR DETAIL BUTTON
