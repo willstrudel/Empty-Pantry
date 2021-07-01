@@ -30,81 +30,75 @@ function searchReceipeData() {
     // fetching url 
   fetch(requestUrl)
     .then(function (response) {
-      // if(response.status ===404){
-      //   console.log('404');
-      // }
-      // console.log(response.status);
       return response.json();
     })
     .then(function (data) {
-      console.log(data);
-      console.log(data.count);
-      if(data.count !== 0){
+      if(data.count !== 0 || data.status !== 404 || data.hits[0] !== null){
         resultCardContainer.empty();
-        for (let i = 0; i < 4; i++) {
-          //initializing card div
-          var cardDiv = $("<div>").addClass("");
-          //create the image of the card
-          var cardImgDiv = $("<div>").addClass("card-image");
-          var imgFigure = $("<figure>").addClass("image is-4by3");
-          var imgEl = $("<img>");
-          imgEl.attr("src", data.hits[i].recipe.image);
-          imgEl.attr("alt", "image not avaliable");
-          cardDiv.append(cardImgDiv.append(imgFigure.append(imgEl)));
-  
-          //create card content div
-          var cardContentDiv = $("<div>");
-          cardContentDiv.addClass("card-content");
-          var mediaDiv = $("<div>");
-          mediaDiv.addClass("media");
-          var mediaContent = $("<div>");
-          mediaDiv.addClass("media-content");
-          var name = $("<p>");
-          name.addClass("title is-4 name");
-          name.text(data.hits[i].recipe.label);
-          var cuisine = $("<p>");
-          cuisine.addClass("subtitle is-6");
-          cuisine.text("cuisine: " + data.hits[i].recipe.cuisineType);
-          var calorie = $("<p>");
-          calorie.addClass("subtitle is-6 calories");
-          calorie.text("calories: " + Math.floor(data.hits[i].recipe.calories));
-          mediaContent.append(name);
-          mediaContent.append(cuisine);
-          mediaContent.append(calorie);
-          cardDiv.append(cardContentDiv.append(mediaDiv.append(mediaContent)));
-  
-          //create card footer div
-          var footerDiv = $("<footer>");
-          footerDiv.addClass("card-footer");
-          var saveBtn = $("<button>");
-          saveBtn.addClass("card-footer-item saveBtn");
-          saveBtn.text("Save");
-          let detailsBtn = document.createElement("button");
-          detailsBtn.textContent = "Details";
-          detailsBtn.setAttribute("class", "card-footer-item detailBtn");
-          footerDiv.append(saveBtn);
-          footerDiv.append(detailsBtn);
-          cardDiv.append(footerDiv);
-          // append the card to the result card container section
-          resultCardContainer.append(cardDiv);
-          //STORE 'NUTRITION LABEL' in data attribute
-          var nutrition_str = encodeURIComponent(
-            JSON.stringify(data.hits[i].recipe.digest)
-          );
-          detailsBtn.setAttribute("data-nutrition" + i, nutrition_str);
-          //STORE 'RECIPE LIST' in data attribute
-          var recipe_str = encodeURIComponent(
-            JSON.stringify(data.hits[i].recipe.ingredientLines)
-          );
-          detailsBtn.setAttribute("data-recipe" + i, recipe_str);
-          //STORE 'CARD INDEX' in data attribute
-          detailsBtn.setAttribute("data-index", i);
-          $('.invalid-input').text('');
-        }
-      }else{
-        $('.invalid-input').text('Invalid input, please try again');
-        resultCardContainer.empty();
+      for (let i = 0; i < 4; i++) {
+        //initializing card div
+        var cardDiv = $("<div>").addClass("card");
+        //create the image of the card
+        var cardImgDiv = $("<div>").addClass("card-image");
+        var imgFigure = $("<figure>").addClass("image is-4by3");
+        var imgEl = $("<img>");
+        imgEl.attr("src", data.hits[i].recipe.image);
+        imgEl.attr("alt", "image not avaliable");
+        cardDiv.append(cardImgDiv.append(imgFigure.append(imgEl)));
+
+        //create card content div
+        var cardContentDiv = $("<div>");
+        cardContentDiv.addClass("card-content");
+        var mediaDiv = $("<div>");
+        mediaDiv.addClass("media");
+        var mediaContent = $("<div>");
+        mediaDiv.addClass("media-content");
+        var name = $("<p>");
+        name.addClass("title is-4 name");
+        name.text(data.hits[i].recipe.label);
+        var cuisine = $("<p>");
+        cuisine.addClass("subtitle is-6");
+        cuisine.text("cuisine: " + data.hits[i].recipe.cuisineType);
+        var calorie = $("<p>");
+        calorie.addClass("subtitle is-6 calories");
+        calorie.text("calories: " + Math.floor(data.hits[i].recipe.calories));
+        mediaContent.append(name);
+        mediaContent.append(cuisine);
+        mediaContent.append(calorie);
+        cardDiv.append(cardContentDiv.append(mediaDiv.append(mediaContent)));
+
+        //create card footer div
+        var footerDiv = $("<footer>");
+        footerDiv.addClass("card-footer");
+        var saveBtn = $("<button>");
+        saveBtn.addClass("card-footer-item saveBtn button is-info is-focused");
+        saveBtn.text("Save");
+        let detailsBtn = document.createElement("button");
+        detailsBtn.textContent = "Details";
+        detailsBtn.setAttribute("class", "card-footer-item detailBtn button is-focused");
+        footerDiv.append(saveBtn);
+        footerDiv.append(detailsBtn);
+        cardDiv.append(footerDiv);
+        // append the card to the result card container section
+        resultCardContainer.append(cardDiv);
+        //STORE 'NUTRITION LABEL' in data attribute
+        var nutrition_str = encodeURIComponent(
+          JSON.stringify(data.hits[i].recipe.digest)
+        );
+        detailsBtn.setAttribute("data-nutrition" + i, nutrition_str);
+        //STORE 'RECIPE LIST' in data attribute
+        var recipe_str = encodeURIComponent(
+          JSON.stringify(data.hits[i].recipe.ingredientLines)
+        );
+        detailsBtn.setAttribute("data-recipe" + i, recipe_str);
+        //STORE 'CARD INDEX' in data attribute
+        detailsBtn.setAttribute("data-index", i);
       }
+    }else{
+    $('.invalid-input').text('Invalid input, please try again');
+        resultCardContainer.empty();
+}
+      
     });
 }
 
@@ -211,6 +205,7 @@ function saveToList(key){
         if(!$('.id-'+index).length){
           var divEl = $('<div>');
           divEl.addClass('id-'+index);
+          divEl.addClass('mini-container');
           var nameEl = $('<div>');
           nameEl.text(name);
           divEl.append(nameEl);
@@ -218,11 +213,11 @@ function saveToList(key){
           caloriesEl.text(calories);
           divEl.append(caloriesEl);
           var removeBtn = $('<button>');
-          removeBtn.addClass('removeBtn');
+          removeBtn.addClass('removeBtn button is-danger is-inverted is-light');
           removeBtn.text('Remove');
           divEl.append(removeBtn);
           var miniDetailBtn = $('<button>');
-          miniDetailBtn.addClass('miniDetailBtn');
+          miniDetailBtn.addClass('miniDetailBtn button is-info');
           miniDetailBtn.text('Details');
           miniDetailBtn.attr("data-recipe", recipe);
           miniDetailBtn.attr("data-nutrition", nutrition);
