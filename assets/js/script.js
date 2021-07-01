@@ -27,7 +27,7 @@ function searchReceipeData() {
     "&mealType=" +
     selectedMealType;
 
-    // fetching url 
+  // fetching url
   fetch(requestUrl)
     .then(function (response) {
       return response.json();
@@ -36,7 +36,7 @@ function searchReceipeData() {
       resultCardContainer.empty();
       for (let i = 0; i < 4; i++) {
         //initializing card div
-        var cardDiv = $("<div>").addClass("");
+        var cardDiv = $("<div>").addClass("card card-equal-height");
         //create the image of the card
         var cardImgDiv = $("<div>").addClass("card-image");
         var imgFigure = $("<figure>").addClass("image is-4by3");
@@ -113,26 +113,37 @@ $(document).on("click", ".detailBtn", function (e) {
   let recipe_object = JSON.parse(decodeURIComponent(recipe_str));
   //Call the table generator function and append table to Modal
   $(".modal-body").append(modalDataGenerator(recipe_object, nutrition_object));
-  $("#myModal").modal("show")
+  $("#myModal").modal("show");
 });
 
 // This function generates a table that contains a recipe list and nutritional label
 function modalDataGenerator(recipe_object, nutrition_object) {
-  let tbl = document.createElement("table");
-  tbl.setAttribute("class", "modal-table");
-  let tr = tbl.insertRow();
+  //PARENT BOX
+  let mainTbl = document.createElement("table");
+  mainTbl.setAttribute("class", "modal-table");
+  let recipeTbl = document.createElement('table');
+  recipeTbl.setAttribute('class', 'recipe-table');
+  let ingreTbl = document.createElement('table');
+  ingreTbl.setAttribute('class', 'ingre-table')
+  let mainTr = mainTbl.insertRow();
+  let mainTd = mainTr.insertCell();
+  mainTd.appendChild(recipeTbl);
+  mainTd.appendChild(ingreTbl);
+  //RECIPE BOX
+  let tr = recipeTbl.insertRow();
   let td = tr.insertCell();
   td.appendChild(document.createTextNode("Ingredient List"));
   for (let i = 0; i < recipe_object.length; i++) {
-    let tr2 = tbl.insertRow();
+    let tr2 = recipeTbl.insertRow();
     let td2 = tr2.insertCell();
     td2.appendChild(document.createTextNode(recipe_object[i]));
   }
-  let tr3 = tbl.insertRow();
+  //INGREDIENT BOX
+  let tr3 = ingreTbl.insertRow();
   let td3 = tr3.insertCell();
   td3.appendChild(document.createTextNode("Nutritional Label"));
   for (let i = 0; i < nutrition_object.length; i++) {
-    let tr4 = tbl.insertRow();
+    let tr4 = ingreTbl.insertRow();
     let td4 = tr4.insertCell();
     td4.appendChild(
       document.createTextNode(
@@ -143,7 +154,7 @@ function modalDataGenerator(recipe_object, nutrition_object) {
       )
     );
   }
-  return tbl;
+  return mainTbl;
 }
 
 // creating a datepicker calendar
@@ -157,83 +168,174 @@ $(function () {
   });
 });
 
-//selector for picked ingredients 
-var ingredientPicked = $('.ingredient-picked');
+//selector for picked ingredients
+var ingredientPicked = $(".ingredient-picked");
 // function to load all ingredient picked on the right side bar
-function loadShoppingCart(){
-    //load corresponding local value
-    for(var i = 0; i < 4; i++){
-      var localData = localStorage.getItem(selectedDate+"-"+i);
-      if(localData !== null){
-        saveToList(selectedDate+"-"+i);
-      } 
+function loadShoppingCart() {
+  //load corresponding local value
+  for (var i = 0; i < 4; i++) {
+    var localData = localStorage.getItem(selectedDate + "-" + i);
+    if (localData !== null) {
+      saveToList(selectedDate + "-" + i);
     }
   }
-
-function saveToList(key){
-  var localItem = localStorage.getItem(key);
-  var localItem_object = JSON.parse(localItem);
-        var name = localItem_object.name;
-        var index = localItem_object.index;
-        var calories = localItem_object.calories;
-        if(!$('.id-'+index).length){
-          var divEl = $('<div>');
-          divEl.addClass('id-'+index);
-          var nameEl = $('<div>');
-          nameEl.text(name);
-          divEl.append(nameEl);
-          var caloriesEl = $('<div>');
-          caloriesEl.text(calories);
-          divEl.append(caloriesEl);
-          var removeBtn = $('<button>');
-          removeBtn.addClass('removeBtn');
-          removeBtn.text('Remove');
-          divEl.append(removeBtn);
-          var miniDetailBtn = $('<button>');
-          miniDetailBtn.addClass('miniDetailBtn');
-          miniDetailBtn.text('Details');
-          divEl.append(miniDetailBtn);
-          ingredientPicked.append(divEl);
-        }
 }
 
-  resultCardContainer.on('click','.saveBtn',function(){
-    var cardDetail = $(this).siblings().last();
-    var index = cardDetail.attr('data-index');
-    var nutrition_str = cardDetail.attr('data-nutrition'+index);
-    var recipe_str = cardDetail.attr('data-recipe'+index);
-    var name = $(this).parent().siblings().eq(1).children().first().children().first().children().first().text();
-    var calories = $(this).parent().siblings().eq(1).children().first().children().first().children().last().text().split(':')[1];
-    var card_object = {
-      index,
-      name,
-      calories,
-      nutrition_str,
-      recipe_str
-    }
-    localStorage.setItem(selectedDate+"-"+index,JSON.stringify(card_object));
-    saveToList(selectedDate+"-"+index);
-  })
+function saveToList(key) {
+  var localItem = localStorage.getItem(key);
+  var localItem_object = JSON.parse(localItem);
+  var name = localItem_object.name;
+  var index = localItem_object.index;
+  var calories = localItem_object.calories;
+  var nutrition = localItem_object.nutrition_str;
+  var recipe = localItem_object.recipe_str;
+  if (!$(".id-" + index).length) {
+    var divEl = $("<div>");
+    divEl.addClass("id-" + index);
+    var nameEl = $("<div>");
+    nameEl.text(name);
+    divEl.append(nameEl);
+    var caloriesEl = $("<div>");
+    caloriesEl.text(calories);
+    divEl.append(caloriesEl);
+    var removeBtn = $("<button>");
+    removeBtn.addClass("removeBtn");
+    removeBtn.text("Remove");
+    divEl.append(removeBtn);
+    var miniDetailBtn = $("<button>");
+    miniDetailBtn.addClass("miniDetailBtn");
+    miniDetailBtn.text("Details");
+    miniDetailBtn.attr("data-recipe", recipe);
+    miniDetailBtn.attr("data-nutrition", nutrition);
+    divEl.append(miniDetailBtn);
+    ingredientPicked.append(divEl);
+  }
+}
 
-//function to run when detail button is clicked
-resultCardContainer.on('click','.detailBtn',function(){
-  console.log(this);
-})
+//EVENT LISTENER FOR THE DETAIL BUTTON in the result box
+ingredientPicked.on("click", ".miniDetailBtn", function (e) {
+  $(".modal-body").html("");
+  let miniNutrition = $(e.currentTarget).data("nutrition");
+  miniNutrition = JSON.parse(decodeURIComponent(miniNutrition));
+  let miniRecipe = $(e.currentTarget).data("recipe");
+  miniRecipe = JSON.parse(decodeURIComponent(miniRecipe));
+  $(".modal-body")
+    .empty()
+    .append(modalDataGenerator(miniRecipe, miniNutrition));
+  $("#myModal").modal("show");
+});
+
+resultCardContainer.on("click", ".saveBtn", function () {
+  var cardDetail = $(this).siblings().last();
+  var index = cardDetail.attr("data-index");
+  var nutrition_str = cardDetail.attr("data-nutrition" + index);
+  var recipe_str = cardDetail.attr("data-recipe" + index);
+  var name = $(this)
+    .parent()
+    .siblings()
+    .eq(1)
+    .children()
+    .first()
+    .children()
+    .first()
+    .children()
+    .first()
+    .text();
+  var calories = $(this)
+    .parent()
+    .siblings()
+    .eq(1)
+    .children()
+    .first()
+    .children()
+    .first()
+    .children()
+    .last()
+    .text()
+    .split(":")[1];
+  var card_object = {
+    index,
+    name,
+    calories,
+    nutrition_str,
+    recipe_str,
+  };
+  localStorage.setItem(selectedDate + "-" + index, JSON.stringify(card_object));
+  saveToList(selectedDate + "-" + index);
+});
 
 //when clear button is clicked, clear local storage on selected Date and clear shopping cart
-$('.btnClear').on('click',function(){
-  for(var i = 0; i < 4; i++){
-    var localData = localStorage.getItem(selectedDate+"-"+i);
-    if(localData !== null){
-      localStorage.removeItem(selectedDate+'-'+i);
+$(".btnClear").on("click", function () {
+  for (var i = 0; i < 4; i++) {
+    var localData = localStorage.getItem(selectedDate + "-" + i);
+    if (localData !== null) {
+      localStorage.removeItem(selectedDate + "-" + i);
     }
   }
 
   ingredientPicked.empty();
-})
+});
 
 //when a saved item's remove button is clicked
-ingredientPicked.on('click','.removeBtn',function(){
-  localStorage.removeItem(selectedDate+'-'+$(this).parent().attr('class').split('-')[1]);
+ingredientPicked.on("click", ".removeBtn", function () {
+  localStorage.removeItem(
+    selectedDate + "-" + $(this).parent().attr("class").split("-")[1]
+  );
   $(this).parent().remove();
-})
+});
+
+
+
+
+
+//Animation Typing Carousel (Code below copied from https://codepen.io/gschier/pen/jkivt)
+var TxtRotate = function(el, toRotate, period) {
+  this.toRotate = toRotate;
+  this.el = el;
+  this.loopNum = 0;
+  this.period = parseInt(period, 10) || 2000;
+  this.txt = '';
+  this.tick();
+  this.isDeleting = false;
+};
+
+TxtRotate.prototype.tick = function() {
+  var i = this.loopNum % this.toRotate.length;
+  var fullTxt = this.toRotate[i];
+
+  if (this.isDeleting) {
+    this.txt = fullTxt.substring(0, this.txt.length - 1);
+  } else {
+    this.txt = fullTxt.substring(0, this.txt.length + 1);
+  }
+
+  this.el.innerHTML = '<span class="wrap">'+this.txt+'</span>';
+  var that = this;
+  var delta = 300 - Math.random() * 100;
+  if (this.isDeleting) { delta /= 2; }
+  if (!this.isDeleting && this.txt === fullTxt) {
+    delta = this.period;
+    this.isDeleting = true;
+  } else if (this.isDeleting && this.txt === '') {
+    this.isDeleting = false;
+    this.loopNum++;
+    delta = 500;
+  }
+  setTimeout(function() {
+    that.tick();
+  }, delta);
+};
+window.onload = function() {
+  var elements = document.getElementsByClassName('txt-rotate');
+  for (var i=0; i<elements.length; i++) {
+    var toRotate = elements[i].getAttribute('data-rotate');
+    var period = elements[i].getAttribute('data-period');
+    if (toRotate) {
+      new TxtRotate(elements[i], JSON.parse(toRotate), period);
+    }
+  }
+  var css = document.createElement("style");
+  css.type = "text/css";
+  css.innerHTML = ".txt-rotate > .wrap { border-right: 0.08em solid #666 }";
+  document.body.appendChild(css);
+};
