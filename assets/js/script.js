@@ -130,21 +130,32 @@ $(document).on("click", ".detailBtn", function (e) {
 
 // This function generates a table that contains a recipe list and nutritional label
 function modalDataGenerator(recipe_object, nutrition_object) {
-  let tbl = document.createElement("table");
-  tbl.setAttribute("class", "modal-table");
-  let tr = tbl.insertRow();
+  //PARENT BOX
+  let mainTbl = document.createElement("table");
+  mainTbl.setAttribute("class", "modal-table");
+  let recipeTbl = document.createElement('table');
+  recipeTbl.setAttribute('class', 'recipe-table');
+  let ingreTbl = document.createElement('table');
+  ingreTbl.setAttribute('class', 'ingre-table')
+  let mainTr = mainTbl.insertRow();
+  let mainTd = mainTr.insertCell();
+  mainTd.appendChild(recipeTbl);
+  mainTd.appendChild(ingreTbl);
+  //RECIPE BOX
+  let tr = recipeTbl.insertRow();
   let td = tr.insertCell();
   td.appendChild(document.createTextNode("Ingredient List"));
   for (let i = 0; i < recipe_object.length; i++) {
-    let tr2 = tbl.insertRow();
+    let tr2 = recipeTbl.insertRow();
     let td2 = tr2.insertCell();
     td2.appendChild(document.createTextNode(recipe_object[i]));
   }
-  let tr3 = tbl.insertRow();
+  //INGREDIENT BOX
+  let tr3 = ingreTbl.insertRow();
   let td3 = tr3.insertCell();
   td3.appendChild(document.createTextNode("Nutritional Label"));
   for (let i = 0; i < nutrition_object.length; i++) {
-    let tr4 = tbl.insertRow();
+    let tr4 = ingreTbl.insertRow();
     let td4 = tr4.insertCell();
     td4.appendChild(
       document.createTextNode(
@@ -155,7 +166,7 @@ function modalDataGenerator(recipe_object, nutrition_object) {
       )
     );
   }
-  return tbl;
+  return mainTbl;
 }
 
 // creating a datepicker calendar
@@ -194,6 +205,8 @@ function saveToList(key){
         var name = localItem_object.name;
         var index = localItem_object.index;
         var calories = localItem_object.calories;
+        var nutrition = localItem_object.nutrition_str;
+        var recipe = localItem_object.recipe_str;
         //if item div never exist, create the div
         if(!$('.id-'+index).length){
           var divEl = $('<div>');
@@ -211,12 +224,28 @@ function saveToList(key){
           var miniDetailBtn = $('<button>');
           miniDetailBtn.addClass('miniDetailBtn');
           miniDetailBtn.text('Details');
+          miniDetailBtn.attr("data-recipe", recipe);
+          miniDetailBtn.attr("data-nutrition", nutrition);
           divEl.append(miniDetailBtn);
           ingredientPicked.append(divEl);
         }
 }
 
-  //function to run when save button is clicled 
+
+//EVENT LISTENER FOR THE DETAIL BUTTON in the result box
+ingredientPicked.on("click", ".miniDetailBtn", function (e) {
+  $(".modal-body").html("");
+  let miniNutrition = $(e.currentTarget).data("nutrition");
+  miniNutrition = JSON.parse(decodeURIComponent(miniNutrition));
+  let miniRecipe = $(e.currentTarget).data("recipe");
+  miniRecipe = JSON.parse(decodeURIComponent(miniRecipe));
+  $(".modal-body")
+    .empty()
+    .append(modalDataGenerator(miniRecipe, miniNutrition));
+  $("#myModal").modal("show");
+});
+
+  //EVENT LISTENER FOR SAVE BUTTON
   resultCardContainer.on('click','.saveBtn',function(){
     //parsing and storing the card details into an object, then store the object into local storage
     var cardDetail = $(this).siblings().last();
@@ -238,10 +267,6 @@ function saveToList(key){
     totalCalories();
   })
 
-//function to run when detail button is clicked
-resultCardContainer.on('click','.detailBtn',function(){
-  console.log(this);
-})
 //when clear button is clicked, clear local storage on selected Date and clear shopping cart
 $('.btnClear').on('click',function(){
   for(var i = 0; i < 4; i++){
