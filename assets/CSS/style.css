@@ -1,22 +1,26 @@
+body { 
+    background: url(./EmptyPantry\ bg.jpg) no-repeat center center fixed;
+    position: relative;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+
+
 /* Card Styling */
-.card .card-image,
-.card .card-image .image img {
-  height: 200px;
+
+.card-container {
+    justify-content: center;
+    display: inline-block;
+    background-color: antiquewhite;
+    margin-top: 50px; 
+    border-radius: 5px;
+    width: 600px;
+    height: auto;
 }
 
-.card {
-    display: flex;
-    flex-direction: column;
-    width: 40%;
-    justify-content: space-around; 
-    margin: 10px;   
-}
-
-.result-card-container {
-    display: flex;
-    flex-wrap: wrap;
-    width: 66%;
-}
 /* End of Card Styling */
 
 /* Modal Styling - center table in the modal */
@@ -40,3 +44,80 @@ table tr:nth-child(1) {
     font-weight: bold;
 }
 /* End of Modal Styling */
+
+
+/* Calendar/ingredients */
+.calendar {
+    position: fixed;
+    right: 50px; 
+    top: 152px; 
+    margin-right: 50px;
+    border-radius: 8px;
+    background-color: rgb(66, 199, 137);
+    padding: 10px;
+}
+
+/* Navbar  */
+.navbar {
+    height: 90px;
+}
+
+p.title {
+    right: 200px;
+    font-size: 40px;
+    margin-top: 12px;
+    margin-right: 20px;
+    font-family: 'Thasadith', sans-serif;
+    font-family: 'Thasadith', sans-serif;
+}
+
+
+.pantryLogo {
+    margin-top: 0px;
+    height: 0px;
+}
+
+img {
+    height: 90px;
+    width: auto;
+}
+
+/* Options content */
+h1.title {
+    background-color:antiquewhite;
+    width: 280px;
+    border-radius: 5px;
+    padding: 8px;
+    font-size: 30px;
+}
+#diet-type {
+    width: 140px;
+    font-size: 15px;
+} 
+
+#meal-type {
+    width: 140px;
+    font-size: 15px;
+}
+
+#user-ingredient-pick {
+    background-color: white;
+    width: 227px;
+    height: 38px;
+    color: black;
+    font-size: 13px;
+}
+
+#search {
+    height: 38px;
+    background-color: ;
+}
+
+/* Row/columns */
+.row-1 {
+    width: %;
+}
+
+.row-2 {
+  
+}
