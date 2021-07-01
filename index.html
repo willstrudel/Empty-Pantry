@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,13 +11,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Calligraffitti&family=Thasadith:wght@700&display=swap"
     rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Raleway:200,100,400" rel="stylesheet" type="text/css" />
+  <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./assets/CSS/reset.css">
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="./assets/CSS/style.css">
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 
 <body>
@@ -32,8 +31,15 @@
       </div>
     </div>
   </nav>
-
-  <div class="row-1">
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <div id='animation'>Our recipes are
+        <span class="txt-rotate" data-period="2000"
+          data-rotate='[ "appetizing.", "divine.", "flavorful.", "delish.", "yummy!" ]'></span>
+      </div>
+    </div>
+  </div>
+  <div class="first-row row-1">
     <div class="col-lg-3">
       <section class="section">
         <h1 class="title">Choose your diet!</h1>
@@ -68,7 +74,7 @@
       </section>
       <!-- Input area for for ingredient choice -->
       <section class="section">
-        <h1 class="title">What ingredients are we working with?</h1>
+        <h1 class="title">What ingredient are we working with?</h1>
         <div class="field has-addons">
           <div class="control">
             <input class="input" id='user-ingredient-pick' type="text" placeholder="Choose your ingredient" value="">
@@ -79,35 +85,33 @@
             </a>
           </div>
         </div>
-        <div class="invalid-input" style="font-size: 25px; color:cornsilk;"></div>
+        <div class="invalid-input" style="font-size: 20px; color:rgb(236, 68, 46);"></div>
       </section>
     </div>
 
-    <div class="row-2">
+    <div class="second-row row-2">
       <div class="col-lg-6">
         <div class="card-container">
           <section class="section result-card-container">
-            <!-- The cards are being appended here. -->
+            <!-- The search result cards are being appended here. -->
           </section>
         </div>
       </div>
     </div>
 
-    <div class="row-3">
+    <div class="third-row row-3">
       <div class="col-lg-3">
         <div class="calendar">
+          <p style='text-align: center; font-size: 25px; font-weight: bold; padding: 0px; margin: 0px;'>Meal Tracker</p>
           <section class="section">
             <div id="datepicker"></div>
           </section>
           <section>
             <article class="message is-success">
               <div class="message-header ingredient-picked">
+                <!-- Saved cards will append here -->
                 <p id="ingredients">Ingredients picked</p>
               </div>
-              <!-- <div class="message-body">
-                <div class="card-set">
-                </div>
-              </div> -->
               <div class="message-header">
                 <h1 class="subtitle">Total Calories:</h1>
                 <button class="button is-danger btnClear">clear</button>
@@ -118,10 +122,9 @@
       </div>
     </div>
   </div>
-
-
-
   <!-- bootstrap script -->
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="./assets/js/script.js"></script>
 </body>
