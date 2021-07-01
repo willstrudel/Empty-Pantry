@@ -40,3 +40,16 @@ table tr:nth-child(1) {
     font-weight: bold;
 }
 /* End of Modal Styling */
+#datepicker {
+    display: flex;
+    justify-content: flex-end;
+    align-items:flex-start
+}
+
+.container {
+    width: 50%;
+}
+
+.ingredient-picked {
+    width:25%;
+}
