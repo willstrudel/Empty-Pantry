@@ -33,7 +33,8 @@ function searchReceipeData() {
       return response.json();
     })
     .then(function (data) {
-      resultCardContainer.empty();
+      if(data.count !== 0 || data.status !== 404 || data.hits[0] !== null){
+        resultCardContainer.empty();
       for (let i = 0; i < 4; i++) {
         //initializing card div
         var cardDiv = $("<div>").addClass("card");
@@ -93,6 +94,11 @@ function searchReceipeData() {
         //STORE 'CARD INDEX' in data attribute
         detailsBtn.setAttribute("data-index", i);
       }
+    }else{
+    $('.invalid-input').text('Invalid input, please try again');
+        resultCardContainer.empty();
+}
+      
     });
 }
 
