@@ -161,61 +161,59 @@ $(function () {
 var ingredientPicked = $('.ingredient-picked');
 // function to load all ingredient picked on the right side bar
 function loadShoppingCart(){
-  //load local storage
-  var savedIngredients = localStorage.getItem(selectedDate);
-  //check if the local storage is empty
-  if(savedIngredients !== null){
-    var ingredientArr = savedIngredients.split(',');
-    // creating cards in the shopping cart
-    for(var i =0; i<ingredientArr.length; i++){
-      if(i%2 === 0){
-        var name = ingredientArr[i];
-      }else{
-        var calories = ingredientArr[i];
-        if($('.id-'+i).length){
-        }else{
-          var itemDiv = $('<div>');
-          var itemName = $('<p>');
-          itemName.text(name);
-          itemName.addClass('id-'+i);
-          itemDiv.append(itemName);
-          var itemCal = $('<p>');
-          itemCal.text(calories);
-          itemDiv.append(itemCal);
-          var detailBtn = $('<button>');
-          detailBtn.text('Details');
-          detailBtn.attr('id','detailBtn');
-          itemDiv.append(detailBtn);
-          var removeBtn = $('<button>');
-          removeBtn.attr('id','removeBtn');
-          removeBtn.text('Remove');
-          itemDiv.append(removeBtn);
-          ingredientPicked.append(itemDiv);
-        }
-      }
+    //load corresponding local value
+    for(var i = 0; i < 4; i++){
+      var localData = localStorage.getItem(selectedDate+"-"+i);
+      if(localData !== null){
+        saveToList(selectedDate+"-"+i);
+      } 
     }
   }
-  
+
+function saveToList(key){
+  var localItem = localStorage.getItem(key);
+  var localItem_object = JSON.parse(localItem);
+        var name = localItem_object.name;
+        var index = localItem_object.index;
+        var calories = localItem_object.calories;
+        if(!$('.id-'+index).length){
+          var divEl = $('<div>');
+          divEl.addClass('id-'+index);
+          var nameEl = $('<div>');
+          nameEl.text(name);
+          divEl.append(nameEl);
+          var caloriesEl = $('<div>');
+          caloriesEl.text(calories);
+          divEl.append(caloriesEl);
+          var removeBtn = $('<button>');
+          removeBtn.addClass('removeBtn');
+          removeBtn.text('Remove');
+          divEl.append(removeBtn);
+          var miniDetailBtn = $('<button>');
+          miniDetailBtn.addClass('miniDetailBtn');
+          miniDetailBtn.text('Details');
+          divEl.append(miniDetailBtn);
+          ingredientPicked.append(divEl);
+        }
 }
 
-// function to run when save button is clicked
-resultCardContainer.on('click','.saveBtn',function(){
-  //get the name of clicked ingredient
-  var name = $(this).parent().siblings().eq(1).children().first().children().first().children('.name').text();
-  //get the calories of the stored ingredient
-  var calories = $(this).parent().siblings().eq(1).children().first().children().first().children('.calories').text().split(' ')[1];
- //pull the local storage for the selected date
-  var selectedDateStorage = localStorage.getItem(selectedDate);
-  var arrTemp = [name,calories];
-  //store the saved ingredient to local storage on selected date
-  if(selectedDateStorage === null){
-    localStorage.setItem(selectedDate,arrTemp);
-  }else if (selectedDateStorage.indexOf(name)<0){
-    localStorage.setItem(selectedDate,selectedDateStorage+','+arrTemp);
-  }
-  //update the shopping cart
-  loadShoppingCart();
-});
+  resultCardContainer.on('click','.saveBtn',function(){
+    var cardDetail = $(this).siblings().last();
+    var index = cardDetail.attr('data-index');
+    var nutrition_str = cardDetail.attr('data-nutrition'+index);
+    var recipe_str = cardDetail.attr('data-recipe'+index);
+    var name = $(this).parent().siblings().eq(1).children().first().children().first().children().first().text();
+    var calories = $(this).parent().siblings().eq(1).children().first().children().first().children().last().text().split(':')[1];
+    var card_object = {
+      index,
+      name,
+      calories,
+      nutrition_str,
+      recipe_str
+    }
+    localStorage.setItem(selectedDate+"-"+index,JSON.stringify(card_object));
+    saveToList(selectedDate+"-"+index);
+  })
 
 //function to run when detail button is clicked
 resultCardContainer.on('click','.detailBtn',function(){
@@ -224,23 +222,18 @@ resultCardContainer.on('click','.detailBtn',function(){
 
 //when clear button is clicked, clear local storage on selected Date and clear shopping cart
 $('.btnClear').on('click',function(){
-  localStorage.removeItem(selectedDate);
+  for(var i = 0; i < 4; i++){
+    var localData = localStorage.getItem(selectedDate+"-"+i);
+    if(localData !== null){
+      localStorage.removeItem(selectedDate+'-'+i);
+    }
+  }
+
   ingredientPicked.empty();
 })
 
 //when a saved item's remove button is clicked
-ingredientPicked.on('click','#removeBtn',function(){
-  //delet the div 
-  var elementsToClear = $(this).siblings().first().attr('class').split('-')[1];
-  console.log(elementsToClear);
-  $(this).parent().empty();
-  var stored = localStorage.getItem(selectedDate).split(',');
-  //remove the corresponding local storage name and calories
-  if(stored.length == 2){
-    localStorage.removeItem(selectedDate);
-  }else{
-    stored.splice((elementsToClear-1),1);
-    stored.splice(elementsToClear-1,1);
-    localStorage.setItem(selectedDate,stored);
-  }
+ingredientPicked.on('click','.removeBtn',function(){
+  localStorage.removeItem(selectedDate+'-'+$(this).parent().attr('class').split('-')[1]);
+  $(this).parent().remove();
 })
