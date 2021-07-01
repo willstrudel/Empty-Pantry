@@ -7,8 +7,6 @@ body {
   overflow: hidden;
 }
 
-
-
 /* Card Styling */
 
 .card-container {
@@ -132,7 +130,6 @@ h1.title {
 
 #search {
   height: 38px;
-  background-color: ;
 }
 
 /* Row/columns */

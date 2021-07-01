@@ -1,7 +1,8 @@
 var calendarEl = $("#datepicker");
 var selectedDate;
 var resultCardContainer = $(".result-card-container");
-var searchBtn = document.querySelector("#search");
+//Search Button
+let searchBtn = document.querySelector("#search");
 
 //Event Listener to search for recipe
 searchBtn.addEventListener("click", searchReceipeData);
@@ -26,7 +27,7 @@ function searchReceipeData() {
     "&mealType=" +
     selectedMealType;
 
-  // fetching url
+    // fetching url 
   fetch(requestUrl)
     .then(function (response) {
       return response.json();
@@ -35,7 +36,7 @@ function searchReceipeData() {
       resultCardContainer.empty();
       for (let i = 0; i < 4; i++) {
         //initializing card div
-        var cardDiv = $("<div>").addClass("card card-equal-height");
+        var cardDiv = $("<div>").addClass("");
         //create the image of the card
         var cardImgDiv = $("<div>").addClass("card-image");
         var imgFigure = $("<figure>").addClass("image is-4by3");
@@ -112,7 +113,7 @@ $(document).on("click", ".detailBtn", function (e) {
   let recipe_object = JSON.parse(decodeURIComponent(recipe_str));
   //Call the table generator function and append table to Modal
   $(".modal-body").append(modalDataGenerator(recipe_object, nutrition_object));
-  $("#myModal").modal("show");
+  $("#myModal").modal("show")
 });
 
 // This function generates a table that contains a recipe list and nutritional label
@@ -169,51 +170,55 @@ $(function () {
   });
 });
 
-//selector for picked ingredients
-var ingredientPicked = $(".ingredient-picked");
+//selector for picked ingredients 
+var ingredientPicked = $('.ingredient-picked');
 // function to load all ingredient picked on the right side bar
-function loadShoppingCart() {
-  //load corresponding local value
-  for (var i = 0; i < 4; i++) {
-    var localData = localStorage.getItem(selectedDate + "-" + i);
-    if (localData !== null) {
-      saveToList(selectedDate + "-" + i);
+function loadShoppingCart(){
+    //load corresponding local value
+    for(var i = 0; i < 4; i++){
+      var localData = localStorage.getItem(selectedDate+"-"+i);
+      if(localData !== null){
+        saveToList(selectedDate+"-"+i);
+      } 
     }
   }
-}
 
-//Create saved ingredient content
-function saveToList(key) {
+//Create a div element for the item under the list, parameter key format: yyyy-mm-dd-i 
+function saveToList(key){
+  //get corresponding local storage item
   var localItem = localStorage.getItem(key);
   //parse the localitem into object
   var localItem_object = JSON.parse(localItem);
-  var name = localItem_object.name;
-  var index = localItem_object.index;
-  var calories = localItem_object.calories;
-  var nutrition = localItem_object.nutrition_str;
-  var recipe = localItem_object.recipe_str;
-  if (!$(".id-" + index).length) {
-    var divEl = $("<div>");
-    divEl.addClass("id-" + index);
-    var nameEl = $("<div>");
-    nameEl.text(name);
-    divEl.append(nameEl);
-    var caloriesEl = $("<div>");
-    caloriesEl.text(calories);
-    divEl.append(caloriesEl);
-    var removeBtn = $("<button>");
-    removeBtn.addClass("removeBtn");
-    removeBtn.text("Remove");
-    divEl.append(removeBtn);
-    var miniDetailBtn = $("<button>");
-    miniDetailBtn.addClass("miniDetailBtn");
-    miniDetailBtn.text("Details");
-    miniDetailBtn.attr("data-recipe", recipe);
-    miniDetailBtn.attr("data-nutrition", nutrition);
-    divEl.append(miniDetailBtn);
-    ingredientPicked.append(divEl);
-  }
+        //get properties from the object
+        var name = localItem_object.name;
+        var index = localItem_object.index;
+        var calories = localItem_object.calories;
+        var nutrition = localItem_object.nutrition_str;
+        var recipe = localItem_object.recipe_str;
+        //if item div never exist, create the div
+        if(!$('.id-'+index).length){
+          var divEl = $('<div>');
+          divEl.addClass('id-'+index);
+          var nameEl = $('<div>');
+          nameEl.text(name);
+          divEl.append(nameEl);
+          var caloriesEl = $('<div>');
+          caloriesEl.text(calories);
+          divEl.append(caloriesEl);
+          var removeBtn = $('<button>');
+          removeBtn.addClass('removeBtn');
+          removeBtn.text('Remove');
+          divEl.append(removeBtn);
+          var miniDetailBtn = $('<button>');
+          miniDetailBtn.addClass('miniDetailBtn');
+          miniDetailBtn.text('Details');
+          miniDetailBtn.attr("data-recipe", recipe);
+          miniDetailBtn.attr("data-nutrition", nutrition);
+          divEl.append(miniDetailBtn);
+          ingredientPicked.append(divEl);
+        }
 }
+
 
 //EVENT LISTENER FOR THE DETAIL BUTTON in the result box
 ingredientPicked.on("click", ".miniDetailBtn", function (e) {
@@ -228,63 +233,65 @@ ingredientPicked.on("click", ".miniDetailBtn", function (e) {
   $("#myModal").modal("show");
 });
 
-//EVENT LISTENER FOR SAVE BUTTON
-resultCardContainer.on("click", ".saveBtn", function () {
-  var cardDetail = $(this).siblings().last();
-  var index = cardDetail.attr("data-index");
-  var nutrition_str = cardDetail.attr("data-nutrition" + index);
-  var recipe_str = cardDetail.attr("data-recipe" + index);
-  var name = $(this)
-    .parent()
-    .siblings()
-    .eq(1)
-    .children()
-    .first()
-    .children()
-    .first()
-    .children()
-    .first()
-    .text();
-  var calories = $(this)
-    .parent()
-    .siblings()
-    .eq(1)
-    .children()
-    .first()
-    .children()
-    .first()
-    .children()
-    .last()
-    .text()
-    .split(":")[1];
-  var card_object = {
-    index,
-    name,
-    calories,
-    nutrition_str,
-    recipe_str,
-  };
-  localStorage.setItem(selectedDate + "-" + index, JSON.stringify(card_object));
-  saveToList(selectedDate + "-" + index);
-});
+  //EVENT LISTENER FOR SAVE BUTTON
+  resultCardContainer.on('click','.saveBtn',function(){
+    //parsing and storing the card details into an object, then store the object into local storage
+    var cardDetail = $(this).siblings().last();
+    var index = cardDetail.attr('data-index');
+    var nutrition_str = cardDetail.attr('data-nutrition'+index);
+    var recipe_str = cardDetail.attr('data-recipe'+index);
+    var name = $(this).parent().siblings().eq(1).children().first().children().first().children().first().text();
+    var calories = $(this).parent().siblings().eq(1).children().first().children().first().children().last().text().split(':')[1];
+    var card_object = {
+      index,
+      name,
+      calories,
+      nutrition_str,
+      recipe_str
+    }
+    //store the card into local storage, if item already exist in the local storage, it will just replace itself and nothing will be changed
+    localStorage.setItem(selectedDate+"-"+index,JSON.stringify(card_object));
+    saveToList(selectedDate+"-"+index);
+    totalCalories();
+  })
 
 //when clear button is clicked, clear local storage on selected Date and clear shopping cart
-$(".btnClear").on("click", function () {
-  for (var i = 0; i < 4; i++) {
-    var localData = localStorage.getItem(selectedDate + "-" + i);
-    if (localData !== null) {
-      localStorage.removeItem(selectedDate + "-" + i);
+$('.btnClear').on('click',function(){
+  for(var i = 0; i < 4; i++){
+    //remove all local storage on the selected date
+    var localData = localStorage.getItem(selectedDate+"-"+i);
+    if(localData !== null){
+      localStorage.removeItem(selectedDate+'-'+i);
     }
   }
   //remove saved list
   totalCalories();
   ingredientPicked.empty();
-});
+})
 
-//when a saved item's remove button is clicked
-ingredientPicked.on("click", ".removeBtn", function () {
-  localStorage.removeItem(
-    selectedDate + "-" + $(this).parent().attr("class").split("-")[1]
-  );
+//when a saved item's remove button is clicked, remove the corresponding card 
+ingredientPicked.on('click','.removeBtn',function(){
+  localStorage.removeItem(selectedDate+'-'+$(this).parent().attr('class').split('-')[1]);
   $(this).parent().remove();
-});
+  totalCalories();
+})
+
+//run after the page is ready
+$(document).ready(function(){
+  ingredientPicked.empty();
+  loadShoppingCart();
+  totalCalories();
+}
+)
+
+//calculate the total calories and update the "total calories" div's tag
+function totalCalories() {
+  calorieSum = 0;
+  if(ingredientPicked.children().length > 0){
+    for(var i =0; i< ingredientPicked.children().length; i++){
+      calorieSum += parseInt(ingredientPicked.children().eq(i).children().eq(1).text());
+    }
+  }
+  // ingredientPicked.parent().children('subtitle').text("Total Calories: "+calorieSum);
+  ingredientPicked.siblings().last().children('.subtitle').text("Total Calories: "+calorieSum);
+}
