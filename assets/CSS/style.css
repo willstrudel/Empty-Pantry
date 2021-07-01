@@ -1,21 +1,32 @@
-body { 
+html, body { 
     background: url(./EmptyPantry\ bg.jpg) no-repeat center center fixed;
     position: absolute;
     background-size: cover;
     height: 100%;
     width: 100%;
-    overflow: hidden;
-  background: url(./EmptyPantry\ bg.jpg) no-repeat center center fixed;
-  position: relative;
-  background-size: cover;
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
 }
 
 /* Card Styling */
 
-.card-container {
+.card {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    justify-content: space-around;
+    margin: 15px;
+    background-color: antiquewhite;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.result-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 95%;
+}
+
+
+/* .card-container {
   justify-content: center;
   display: inline-block;
   background-color: antiquewhite;
@@ -23,7 +34,7 @@ body {
   border-radius: 5px;
   width: 600px;
   height: auto;
-}
+} */
 
 /* End of Card Styling */
 
@@ -33,18 +44,24 @@ body {
   justify-content: center;
 }
 
+.modal-content {
+    background-color: antiquewhite;
+}
+
 .modal-table {
   width: 400px;
   font-size: 10px;
-  border: 5px solid rgb(10, 145, 82);
+  border: 5px solid rgb(66, 199, 137);
+  border-radius: 10px;
 }
 
 .recipe-table {
-  border: 2px solid rgb(10, 145, 82);
+  border: 2px solid rgb(66, 199, 137);
   width: 95%;
   margin: auto;
   margin-top: 10px;
   margin-bottom: 10px;
+  border-radius: 5px;
 }
 
 .recipe-table td {
@@ -57,7 +74,7 @@ body {
 }
 
 .ingre-table {
-  border: 2px solid rgb(10, 145, 82);
+  border: 2px solid rgb(66, 199, 137);
   width: 95%;
   margin: auto;
   margin-bottom: 10px;
@@ -74,14 +91,43 @@ body {
 
 /* Calendar/ingredients */
 .calendar {
-  position: fixed;
+  position: absolute;
   right: 50px; 
-  top: 152px; 
-  margin-right: 50px;
+  top: 46px; 
+  margin-right: 20px;
   border-radius: 8px;
   background-color: rgb(66, 199, 137);
   padding: 10px;
 }
+
+.ingredient-picked div {
+    font-size: 11px;
+    text-align: center;
+    color: black;
+}
+
+.ingredient-picked {
+    display: flex;
+    flex-direction: column;
+}
+
+.ingredient-picked div {
+    padding: 5px;
+}
+
+.ingredient-picked button {
+    padding: 5px;
+}
+
+.mini-container {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    background-color: antiquewhite;
+    padding: 10px;
+    margin: 10px;
+}
+
 
 /* Navbar  */
 .navbar {
@@ -138,9 +184,21 @@ h1.title {
   height: 38px;
 }
 
-/* Row/columns */
-.row-1 {
+.message-header {
+    border-radius: 0px;
 }
 
-.row-2 {
+h1.subtitle {
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+    background-color: rgb(39, 133, 240);
+    padding: 5px;
+    border-radius: 3px;
+}
+
+.btnClear {
+    height: 30px;
+    width: 50px;
+    font-size: 13px;
 }

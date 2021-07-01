@@ -36,7 +36,7 @@ function searchReceipeData() {
       resultCardContainer.empty();
       for (let i = 0; i < 4; i++) {
         //initializing card div
-        var cardDiv = $("<div>").addClass("");
+        var cardDiv = $("<div>").addClass("card");
         //create the image of the card
         var cardImgDiv = $("<div>").addClass("card-image");
         var imgFigure = $("<figure>").addClass("image is-4by3");
@@ -70,11 +70,11 @@ function searchReceipeData() {
         var footerDiv = $("<footer>");
         footerDiv.addClass("card-footer");
         var saveBtn = $("<button>");
-        saveBtn.addClass("card-footer-item saveBtn");
+        saveBtn.addClass("card-footer-item saveBtn button is-info is-focused");
         saveBtn.text("Save");
         let detailsBtn = document.createElement("button");
         detailsBtn.textContent = "Details";
-        detailsBtn.setAttribute("class", "card-footer-item detailBtn");
+        detailsBtn.setAttribute("class", "card-footer-item detailBtn button is-focused");
         footerDiv.append(saveBtn);
         footerDiv.append(detailsBtn);
         cardDiv.append(footerDiv);
@@ -199,6 +199,7 @@ function saveToList(key){
         if(!$('.id-'+index).length){
           var divEl = $('<div>');
           divEl.addClass('id-'+index);
+          divEl.addClass('mini-container');
           var nameEl = $('<div>');
           nameEl.text(name);
           divEl.append(nameEl);
@@ -206,11 +207,11 @@ function saveToList(key){
           caloriesEl.text(calories);
           divEl.append(caloriesEl);
           var removeBtn = $('<button>');
-          removeBtn.addClass('removeBtn');
+          removeBtn.addClass('removeBtn button is-danger is-inverted is-light');
           removeBtn.text('Remove');
           divEl.append(removeBtn);
           var miniDetailBtn = $('<button>');
-          miniDetailBtn.addClass('miniDetailBtn');
+          miniDetailBtn.addClass('miniDetailBtn button is-info');
           miniDetailBtn.text('Details');
           miniDetailBtn.attr("data-recipe", recipe);
           miniDetailBtn.attr("data-nutrition", nutrition);
