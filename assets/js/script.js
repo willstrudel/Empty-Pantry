@@ -148,12 +148,14 @@ function modalDataGenerator(recipe_object, nutrition_object) {
 
 // creating a datepicker calendar
 $(function () {
+  //default the selectedDate to today's date
   selectedDate = calendarEl.datepicker({ dateFormat: "yy-mm-dd" }).val();
-  console.log(selectedDate);
+  //functions to run when selected on a different date
   calendarEl.on("change", function () {
     selectedDate = $(this).val();
     ingredientPicked.empty();
     loadShoppingCart();
+    totalCalories();
   });
 });
 
@@ -170,12 +172,17 @@ function loadShoppingCart(){
     }
   }
 
+//Create a div element for the item under the list, parameter key format: yyyy-mm-dd-i 
 function saveToList(key){
+  //get corresponding local storage item
   var localItem = localStorage.getItem(key);
+  //parse the localitem into object
   var localItem_object = JSON.parse(localItem);
+        //get properties from the object
         var name = localItem_object.name;
         var index = localItem_object.index;
         var calories = localItem_object.calories;
+        //if item div never exist, create the div
         if(!$('.id-'+index).length){
           var divEl = $('<div>');
           divEl.addClass('id-'+index);
@@ -197,7 +204,9 @@ function saveToList(key){
         }
 }
 
+  //function to run when save button is clicled 
   resultCardContainer.on('click','.saveBtn',function(){
+    //parsing and storing the card details into an object, then store the object into local storage
     var cardDetail = $(this).siblings().last();
     var index = cardDetail.attr('data-index');
     var nutrition_str = cardDetail.attr('data-nutrition'+index);
@@ -211,29 +220,53 @@ function saveToList(key){
       nutrition_str,
       recipe_str
     }
+    //store the card into local storage, if item already exist in the local storage, it will just replace itself and nothing will be changed
     localStorage.setItem(selectedDate+"-"+index,JSON.stringify(card_object));
     saveToList(selectedDate+"-"+index);
+    totalCalories();
   })
 
 //function to run when detail button is clicked
 resultCardContainer.on('click','.detailBtn',function(){
   console.log(this);
 })
-
 //when clear button is clicked, clear local storage on selected Date and clear shopping cart
 $('.btnClear').on('click',function(){
   for(var i = 0; i < 4; i++){
+    //remove all local storage on the selected date
     var localData = localStorage.getItem(selectedDate+"-"+i);
     if(localData !== null){
       localStorage.removeItem(selectedDate+'-'+i);
     }
   }
-
+  //remove saved list
+  totalCalories();
   ingredientPicked.empty();
 })
 
-//when a saved item's remove button is clicked
+//when a saved item's remove button is clicked, remove the corresponding card 
 ingredientPicked.on('click','.removeBtn',function(){
   localStorage.removeItem(selectedDate+'-'+$(this).parent().attr('class').split('-')[1]);
   $(this).parent().remove();
+  totalCalories();
 })
+
+//run after the page is ready
+$(document).ready(function(){
+  ingredientPicked.empty();
+  loadShoppingCart();
+  totalCalories();
+}
+)
+
+//calculate the total calories and update the "total calories" div's tag
+function totalCalories() {
+  calorieSum = 0;
+  if(ingredientPicked.children().length > 0){
+    for(var i =0; i< ingredientPicked.children().length; i++){
+      calorieSum += parseInt(ingredientPicked.children().eq(i).children().eq(1).text());
+    }
+  }
+  // ingredientPicked.parent().children('subtitle').text("Total Calories: "+calorieSum);
+  ingredientPicked.siblings().last().children('.subtitle').text("Total Calories: "+calorieSum);
+}
