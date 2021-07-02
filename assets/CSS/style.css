@@ -1,0 +1,304 @@
+html,
+body {
+  background: url(./EmptyPantry\ bg.jpg) no-repeat center center fixed;
+  position: absolute;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+}
+
+/* Navbar styling */
+.navbar {
+  height: 90px;
+  background-image: linear-gradient(to right, rgb(63, 63, 63), rgb(66, 199, 137));
+}
+
+/* .navbar-menu {
+   
+} */
+
+.navbar p {
+  color: rgb(252, 244, 210);
+  right: 45px;
+  font-size: 60px;
+  margin-right: 20px;
+  font-family: 'Neucha', cursive;
+}
+
+.pantryLogo {
+  margin-top: 0px;
+  height: 0px;
+}
+
+img {
+  height: 90px;
+  width: auto;
+  border-radius: 8px;
+}
+
+/* End of Navbar styling */
+
+/* Animation Styling */
+
+.animation {
+  font-weight: 200;
+  margin: 0.4em 0;
+  font-size: 4em;
+}
+
+#animation {
+    font-family: 'Neucha', cursive;
+}
+
+.jumbotron {
+  position: relative;
+  width: 100vw;
+  margin: 0px;
+  padding: 0px;
+}
+.jumbotron .container {
+  position: relative;
+  z-index: 2;
+  color: #aaa;
+  font-size: 40px;
+  text-align: center;
+}
+.jumbotron:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("./EmptyPantry\ bg.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  filter: blur(5.5px);
+  transform: scale(1.1);
+}
+
+.txt-rotate {
+    font-size: 40px;
+    color: rgb(66, 199, 137);
+    font-style: italic;
+}
+
+/* End of Animation styling */
+
+/* Card Styling */
+
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  justify-content: space-around;
+  margin: 15px;
+  background-color: antiquewhite;
+  padding: 15px;
+  border-radius: 5px;
+  border: 5px ridge rgb(138, 138, 138);
+}
+
+.result-card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+/* End of Card Styling */
+
+/* Modal Styling - center table in the modal */
+.modal h4 {
+    color: ;
+    font-size: 25px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+}
+.modal-body {
+  display: flex;
+  justify-content: center;
+}
+
+.modal-content {
+  background-color: antiquewhite;
+}
+
+.modal-table {
+  width: 400px;
+  font-size: 10px;
+  border: 5px solid rgb(66, 199, 137);
+  border-radius: 10px;
+}
+
+.recipe-table {
+  border: 2px solid rgb(66, 199, 137);
+  width: 95%;
+  margin: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.recipe-table td {
+  padding: 5px;
+}
+
+.recipe-table tr:nth-child(1) {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.ingre-table {
+  border: 2px solid rgb(66, 199, 137);
+  width: 95%;
+  margin: auto;
+  margin-bottom: 10px;
+}
+.ingre-table td {
+  padding: 3px;
+}
+.ingre-table tr:nth-child(1) {
+  font-size: 15px;
+  font-weight: bold;
+}
+/* End of Modal Styling */
+
+/* Calendar/ingredients styling */
+.mealTracker {
+    font-family: 'Neucha', cursive;
+    font-size: 50px;
+}
+
+.calendar {
+  position: absolute;
+  right: 50px;
+  top: 46px;
+  border: 5px groove rgb(114, 114, 114);
+  border-radius: 8px;
+  background-color: rgb(66, 199, 137);
+  padding: 10px;
+}
+
+.ingredient-picked div {
+  font-size: 11px;
+  text-align: center;
+  color: black;
+}
+
+.ingredient-picked {
+  display: flex;
+  flex-direction: column;
+}
+
+.ingredient-picked div {
+  padding: 5px;
+}
+
+.ingredient-picked button {
+  padding: 5px;
+}
+
+.mini-container {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  background-color: antiquewhite;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 3px;
+}
+
+.message-header {
+  border-radius: 0px;
+}
+
+h1.subtitle {
+  color: white;
+  font-weight: bold;
+  font-size: 15px;
+  background-color: rgb(39, 133, 240);
+  padding: 5px;
+  border-radius: 3px;
+}
+
+h1.title {
+    font-family: 'Goudy Bookletter 1911', serif;
+    border: 3px groove rgb(114, 114, 114);
+}
+
+.btnClear {
+  height: 30px;
+  width: 50px;
+  font-size: 13px;
+}
+
+/* End of Calendar/ingredients styling */
+
+/* Options content */
+h1.title {
+  background-color: antiquewhite;
+  width: 280px;
+  border-radius: 5px;
+  padding: 8px;
+  font-size: 30px;
+}
+#diet-type {
+  width: 140px;
+  font-size: 15px;
+}
+
+#meal-type {
+  width: 140px;
+  font-size: 15px;
+}
+
+#user-ingredient-pick {
+  background-color: white;
+  width: 227px;
+  height: 38px;
+  color: black;
+  font-size: 13px;
+}
+
+#search {
+  height: 38px;
+}
+
+/* End of Options content styling */
+
+@media all and (max-width: 1200px) {
+  .navbar-menu {
+      display: flex;
+      justify-content: center;
+      background: linear-gradient(to right, rgb(63, 63, 63), rgb(66, 199, 137));
+  }
+
+  .navbar-end {
+      display: flex;
+      justify-content: center;
+  }
+
+  .navbar.is-success {
+    background: linear-gradient(to right, rgb(63, 63, 63), rgb(66, 199, 137));
+  }
+
+  #datepicker {
+    display: flex;
+    justify-content: center;
+  }
+
+  .result-card-container {
+    padding-right:0px;
+  }
+
+  .jumbotron .container {
+    font-size: 30px;
+  }
+
+  .calendar {
+    position: unset;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

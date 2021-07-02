@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Empty Pantry</title>
+  <!-- jquery/bootstrap/bulma -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Goudy+Bookletter+1911&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Neucha&display=swap" rel="stylesheet"> 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Yomogi&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/CSS/reset.css">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./assets/CSS/style.css">
+</head>
+
+<body>
+  <nav class="navbar is-success" role="navigation" aria-label="main navigation">
+    <div class="navbar-menu">
+      <img src="./assets/css/EmptyPantry.png" alt="logo">
+      <div class="navbar-item">
+      </div>
+      <div class="navbar-end">
+        <p class="mainTitle">Empty Pantry</p>
+      </div>
+    </div>
+  </nav>
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <div id='animation'>Our recipes are
+        <span class="txt-rotate" data-period="2000"
+          data-rotate='[ "appetizing!", "~divine~", "flavorful!", "delish!", "yummy!" ]'></span>
+      </div>
+    </div>
+  </div>
+  <div class="first-row row-1">
+    <div class="col-lg-3">
+      <section class="section">
+        <h1 class="title">Choose your diet!</h1>
+        <div class="field">
+          <div class="control">
+            <div class="select is-primary">
+              <select id='diet-type'>
+                <option value='balanced'>Balanced</option>
+                <option value='low-carb'>Low-Carb</option>
+                <option value='low-fat'>Low-Fat</option>
+                <option value='high-protein'>High-Protein</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Meal Type Choice-->
+      <section class="section">
+        <h1 class="title">Choose your meal type!</h1>
+        <div class="field">
+          <div class="control">
+            <div class="select is-primary">
+              <select id='meal-type'>
+                <option value='BreakFast'>BreakFast</option>
+                <option value='Lunch'>Lunch</option>
+                <option value='Dinner'>Dinner</option>
+                <option value='Snacks'>Snacks</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Input area for for ingredient choice -->
+      <section class="section">
+        <h1 class="title">What ingredient are we working with?</h1>
+        <div class="field has-addons">
+          <div class="control">
+            <input class="input" id='user-ingredient-pick' type="text" placeholder="Choose your ingredient" value="">
+          </div>
+          <div class="control">
+            <a class="button" id='search'>
+              Search
+            </a>
+          </div>
+        </div>
+        <div class="invalid-input" style="font-size: 20px; color:rgb(236, 68, 46);"></div>
+      </section>
+    </div>
+
+    <div class="second-row row-2">
+      <div class="col-lg-6">
+        <div class="card-container">
+          <section class="section result-card-container">
+            <!-- The search result cards are being appended here. -->
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <div class="third-row row-3">
+      <div class="col-lg-3">
+        <div class="calendar">
+          <p class ="mealTracker" style='text-align: center;padding: 0px; margin: 0px;'>Meal Tracker</p>
+          <section class="section">
+            <div id="datepicker"></div>
+          </section>
+          <section>
+            <article class="message is-success">
+              <div class="message-header ingredient-picked">
+                <!-- Saved cards will append here -->
+                <p id="ingredients">Ingredients picked</p>
+              </div>
+              <div class="message-header">
+                <h1 class="subtitle">Total Calories:</h1>
+                <button class="button is-danger btnClear">clear</button>
+              </div>
+            </article>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- bootstrap script -->
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="./assets/js/script.js"></script>
+</body>
+<!-- CREATE A MODAL -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+            aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Meal Information</h4>
+      </div>
+      <div class="modal-body">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</html>
