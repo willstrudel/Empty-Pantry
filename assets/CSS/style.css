@@ -10,14 +10,20 @@ body {
 /* Navbar styling */
 .navbar {
   height: 90px;
+  background-image: linear-gradient(to right, rgb(63, 63, 63), rgb(66, 199, 137));
 }
 
-p.title {
-  right: 200px;
-  font-size: 50px;
-  margin-top: 12px;
+/* .navbar-menu {
+   
+} */
+
+.navbar p {
+  color: rgb(252, 244, 210);
+  right: 45px;
+  font-size: 60px;
   margin-right: 20px;
-  font-family: "Merienda", cursive;
+  font-family: 'Neucha', cursive;
+
 }
 
 .pantryLogo {
@@ -28,6 +34,7 @@ p.title {
 img {
   height: 90px;
   width: auto;
+  border-radius: 8px;
 }
 
 /* End of Navbar styling */
@@ -35,12 +42,15 @@ img {
 /* Animation Styling */
 
 .animation {
-  font-family: "Raleway", sans-serif;
   font-weight: 200;
   margin: 0.4em 0;
   font-size: 4em;
 }
 
+
+#animation {
+    font-family: 'Neucha', cursive;
+}
 .jumbotron {
   position: relative;
   width: 100vw;
@@ -68,6 +78,12 @@ img {
   transform: scale(1.1);
 }
 
+.txt-rotate {
+    font-size: 40px;
+    color: rgb(66, 199, 137);
+    font-style: italic;
+}
+
 /* End of Animation styling */
 
 /* Card Styling */
@@ -79,8 +95,9 @@ img {
   justify-content: space-around;
   margin: 15px;
   background-color: antiquewhite;
-  padding: 10px;
+  padding: 15px;
   border-radius: 5px;
+  border: 5px ridge rgb(138, 138, 138);
 }
 
 .result-card-container {
@@ -92,6 +109,13 @@ img {
 /* End of Card Styling */
 
 /* Modal Styling - center table in the modal */
+.modal h4 {
+    color: ;
+    font-size: 25px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+}
+
 .modal-body {
   display: flex;
   justify-content: center;
@@ -142,10 +166,16 @@ img {
 /* End of Modal Styling */
 
 /* Calendar/ingredients styling */
+.mealTracker {
+    font-family: 'Neucha', cursive;
+    font-size: 50px;
+}
+
 .calendar {
   position: absolute;
   right: 50px;
   top: 46px;
+  border: 5px groove rgb(114, 114, 114);
   border-radius: 8px;
   background-color: rgb(66, 199, 137);
   padding: 10px;
@@ -177,6 +207,7 @@ img {
   background-color: antiquewhite;
   padding: 10px;
   margin: 10px;
+  border-radius: 3px;
 }
 
 .message-header {
@@ -190,6 +221,11 @@ h1.subtitle {
   background-color: rgb(39, 133, 240);
   padding: 5px;
   border-radius: 3px;
+}
+
+h1.title {
+    font-family: 'Goudy Bookletter 1911', serif;
+    border: 3px groove rgb(114, 114, 114);
 }
 
 .btnClear {
@@ -233,6 +269,21 @@ h1.title {
 /* End of Options content styling */
 
 @media all and (max-width: 1200px) {
+  .navbar-menu {
+      display: flex;
+      justify-content: center;
+      background: linear-gradient(to right, rgb(63, 63, 63), rgb(66, 199, 137));
+  }
+
+  .navbar-end {
+      display: flex;
+      justify-content: center;
+  }
+
+  .navbar.is-success {
+    background: linear-gradient(to right, rgb(63, 63, 63), rgb(66, 199, 137));
+  }
+
   #datepicker {
     display: flex;
     justify-content: center;
