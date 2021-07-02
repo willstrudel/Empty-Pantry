@@ -303,9 +303,9 @@ $(".btnClear").on("click", function () {
 
 //when a saved item's remove button is clicked, remove the corresponding card
 ingredientPicked.on("click", ".removeBtn", function () {
+  console.log(localStorage.getItem(selectedDate + "-" + $(this).parent().attr("class").split("-")[1].split(' ')[0]));
   localStorage.removeItem(
-    selectedDate + "-" + $(this).parent().attr("class").split("-")[1]
-  );
+    selectedDate + "-" + $(this).parent().attr("class").split("-")[1].split(' ')[0]);
   $(this).parent().remove();
   totalCalories();
 });
