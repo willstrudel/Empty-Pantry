@@ -23,6 +23,7 @@ body {
   font-size: 60px;
   margin-right: 20px;
   font-family: 'Neucha', cursive;
+
 }
 
 .pantryLogo {
@@ -46,10 +47,10 @@ img {
   font-size: 4em;
 }
 
+
 #animation {
     font-family: 'Neucha', cursive;
 }
-
 .jumbotron {
   position: relative;
   width: 100vw;
@@ -114,6 +115,7 @@ img {
     font-family:Verdana, Geneva, Tahoma, sans-serif;
     font-weight: bold;
 }
+
 .modal-body {
   display: flex;
   justify-content: center;
